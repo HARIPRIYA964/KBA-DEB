@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        p{
+            font-family:'Times New Roman', Times, serif;
+            color: #2c0599;
+            text-align: right;
+            text-decoration-line:line-through;
+            font-style: italic;
+        }
+        .nav{
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+
+
+        }
+        .nav li{
+            margin-right:20px ;
+            color: green;
+            font-style: italic;
+        }
+        .nav li a{
+            text-decoration-line: none;
+            color: green;
+            font-style: italic;
+            
+        }
+        .div p{
+            color: Red;
+            text-align: center;
+            background-color:rgb(32, 31, 31) ;
+            text-decoration-line: underline;
+        }
+        .div1 p{
+            color: rgb(238, 6, 6);
+            
+            background-color:rgb(155, 150, 150) ;
+            text-decoration-line: line-through;
+        }
+        .div2 {
+            background-color: aqua;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Styling Page</title>
+</head>
+
+<body>
+
+    <p style="font-family: 'Times New Roman', Times, serif; 
+    color: hsl(0, 77%, 48%);
+     font-style: italic;
+      text-align: center; 
+     text-decoration-line: underline; 
+     background-color: aquamarine;">Welcome</p>
+
+     <!-- INLINE -->
+     <p>First style sheet</p>
+     <nav>
+        <ul class="nav">
+            <li> <a href="#home">Home</a></li>
+            <li a href="#about">About</a></li>
+            <li a href="#services">Services</a></li>
+            <li a href="#contact">Contact</a></li>
+        </ul>
+     </nav>
+     <div class="div">
+        <p>Welcome to CSS</p>
+     </div>
+     <div class="div1">
+        <p>Welcome</p>
+    </div>
+    <div class="div2">Hello
+        <p style=" display: inline; color: red;">How</p>
+        <p style="text-align: left; color: red;">are</p>
+        you?
+    </div>
+</body>
+</html>
