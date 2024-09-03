@@ -1,0 +1,108 @@
+/* login Page */
+
+h1{
+    color:rgb(184, 12, 236);
+    text-align: center;
+    padding-top: 10px;
+}
+
+body{
+    background-color: antiquewhite;
+}
+
+.container{
+    background-color:white;
+    width: 400px;
+    height: 400px;
+    border-radius: 10px;
+    margin: 150px 650px 400px 450px;
+   font-family: 'Courier New', Courier, monospace;
+   
+    
+}
+
+.content1{
+    padding-left: 100px;
+    padding-top:10px;
+}
+
+.content2{
+    padding-left: 100px;
+    padding-top:10px;
+}
+
+.content3{
+    text-align: center;
+    padding-top: 20px ; 
+    
+    
+}
+
+.content4{
+    text-decoration: underline;
+    padding-left: 120px;
+    color: blue;
+    padding-top: 17px;
+    font-size: 15px;
+    
+    
+    
+}
+
+.content5{
+    padding-left: 60px;
+    padding-top: 30px;
+
+}
+
+.content5 a{
+    color: blue;
+}
+.content3 input{
+    width: 50px;
+    height: 30px;
+}
+
+
+/* Sign up */
+
+.container1{
+    background-color:white;
+    width: 400px;
+    height: 400px;
+    border-radius: 10px;
+    margin: 150px 650px 400px 450px;
+   font-family: 'Courier New', Courier, monospace;
+   
+    
+}
+body1{
+    background-color: aqua;
+}
+
+
+.col1{
+    padding-left: 100px;
+    padding-top: 10px;
+}
+
+.col2{
+    padding-left: 100px;
+    padding-top: 10px;
+}
+
+.col3{
+    padding-left: 100px;
+    padding-top: 10px;
+}
+
+.col4{
+    padding-left: 100px;
+    padding-top: 10px;
+}
+
+.col5{
+    padding-left: 100px;
+    padding-top: 10px;
+   
+}
