@@ -339,6 +339,10 @@ cursor: pointer;
     width: 50px;
     height: 50px;
 }
+
+.container4{
+    display: flex;
+ }
 .home2{
     color: rgb(58, 3, 71);
     padding-top: 40px;
@@ -423,10 +427,7 @@ cursor: pointer;
     margin: 60px 140px;
  }
 
- .container4{
-    display: flex;
- }
-
+ 
  .home17 input{
     background-color: rgb(250, 220, 241);
     margin-top:20px ;
@@ -739,66 +740,379 @@ cursor: pointer;
     margin-top: -10px;
  }
 
- .home5{
-    border: 4px solid black;
-    width:390px;
-    height: 390px;
-    margin-left: 20px;
 
-}
-.home6 img{
-    width: 300px;
-    height: 200px;
-    margin: 0px 29px;
-}
-.home7 h1{
-    color: black;
-    font-size: 20px;
-}
- .home8{
-    margin: 60px 140px;
- }
-
- .home9{
-    border: 4px solid black;
-    width:390px;
-    height: 390px;
-    margin-left: 20px;
-
-}
-.home11 img{
-    width: 300px;
-    height: 200px;
-    margin: 0px 29px;
-}
-.home10 h1{
-    color: black;
-    font-size: 20px;
-}
- .home12{
-    margin: 60px 140px;
- }
-
- .home13{
-    border: 4px solid black;
-    width:390px;
-    height: 390px;
-    margin-left: 20px;
-
-}
-.home15 img{
-    width: 300px;
-    height: 200px;
-    margin: 0px 29px;
-}
-.home14 h1{
-    color: black;
-    font-size: 20px;
-}
- .home16{
-    margin: 60px 140px;
- }
-
- .container4{
+ .container20{
     display: flex;
  }
+
+
+.contact5{
+    /* border: 4px solid  white; */
+   
+    height: 390px;
+    margin-left: 20px;
+    width:48%;
+    float: left;
+
+}
+.contact5 img{
+    border:1px solid rgb(240, 198, 236);
+    background-color: rgb(240, 198, 236);
+    border-radius: 90px;
+    width: 50px;
+    height: 50px;
+    margin: 30px 300px;
+
+    
+}
+
+.contact5 h4{
+    color: black;
+    font-size: 20px;
+    font-family:'Times New Roman', Times, serif;
+    margin-left: 300px;
+    margin-top: -20px;
+}
+
+ .contact5 p{
+    margin-left: 50px;
+    text-align: center;
+    margin-top: -20px;
+ }
+
+
+ .contact5 .p1{
+    margin-top: -10px;
+    color: rgb(228, 131, 215);
+    font-size: 15px; 
+ }
+ .contact9{
+    /* border: 4px solid black; */
+   
+    width:48%;
+    float: left;
+    height: 390px;
+    margin-left: 20px;
+
+}
+
+
+.contact9 img{
+    border:1px solid rgb(240, 198, 236);
+    background-color: rgb(240, 198, 236);
+    border-radius: 90px;
+    width: 50px;
+    height: 50px;
+    margin: 30px -30px;
+}
+.contact9 h4{
+    color: black;
+    font-size: 20px;
+    margin-left: 300px;
+    margin-top: -20px;
+    margin-left: -33px;
+}
+
+.contact9 p{
+    margin-left: -360px;
+    text-align: center;
+    margin-top: -20px;
+ }
+
+
+.contact9 .p2{
+    margin-top: -10px;
+    color: rgb(228, 131, 215);
+    font-size: 15px;
+ }
+ /* .contact12{
+    margin: 60px 140px;
+ } */
+
+ .contact13{
+    /* border: 4px solid black; */
+    width:390px;
+    height: 390px;
+    margin-left: 20px;
+
+}
+.contact13 img{
+    border:1px solid rgb(240, 198, 236);
+    background-color: rgb(240, 198, 236);
+    border-radius: 90px;
+    width: 50px;
+    height: 50px;
+    margin: 30px -90px;
+}
+.contact13 h4{
+    color: black;
+    font-size: 20px;
+    margin-top: -20px;
+    margin-left: -90px;
+}
+
+.contact13 p{
+    margin-left: -360px;
+    text-align: center;
+    margin-top: -20px;
+    
+ }
+
+
+.contact13 .p3{
+    margin-top: -10px;
+    color: rgb(228, 131, 215);
+    font-size: 15px;
+ }
+
+ .contact16{
+    margin: 60px 140px;
+ }
+
+
+
+
+ /* Certiapp */
+ /* 1.fontpage */
+ 
+ .body7{
+    background-color: white;
+    margin: 1px;
+}
+
+.frontpage{
+    
+    height: 60px;
+    position: sticky;
+    top: 0;
+    margin-right: 30px;
+}
+
+
+
+
+
+.nav3{
+    list-style-type: none;
+    display: flex;
+    font-size: 20px;
+  
+    
+
+}
+
+.nav4{
+    text-align: right;
+    float: right;
+    display: flex;
+    justify-content: flex-end;
+    top: 0;
+    background-color: white;
+   
+  
+
+}
+
+.nav3 li a{
+    margin: 2;
+    padding:1;
+    color: black;
+    margin-left: -70px;
+    text-decoration: none;
+    
+     
+    
+}
+
+.nav3  li:hover{
+
+cursor: pointer;
+
+}
+
+
+.front1{
+    border: 1px solid  rgb(63, 63, 247);
+    box-sizing: border-box;
+    padding: 10px;
+    background-color: rgb(63, 63, 247);
+    margin-right: 100px;
+   
+    
+   
+ 
+ }
+
+ .nav3 li .front1{
+    color: white;
+    
+ }
+
+ .front2 img{
+    width:150px;
+    height: 150px;
+    margin-top: 20px;
+    margin-left: 20px;
+ }
+
+ .front3{
+    margin-left: 550px;
+    margin-top: 30px;
+    box-sizing: border-box;
+    padding: 5px;
+ }
+
+ .front4{
+    box-sizing: border-box;
+    padding: 5px;
+    margin-left: 10px;
+ }
+
+ .front5 h1{
+    color: black ;
+ }
+
+
+ /* Issue Certificate */
+
+ .front6{
+    margin-right: 1330px;
+    color: black;
+ }
+
+ .frontpage2{
+    margin-left: 450px;
+    margin-top: 150px;
+    border: 2px solid black;
+    width: 400px;
+    height: 600px;
+ }
+
+ .frontpage3{
+    margin-top: 50px;
+    font-size: 25px;
+    margin-left: 40px;
+
+ }
+
+ .issue1{
+    margin-left: 40px;
+ }
+
+ .issue2{
+    margin-top: 15px;
+    margin-left: 40px;   
+ }
+
+ .issue2 select{
+    width: 300px;
+    height: 40px;
+ }
+
+ .issue3{
+    margin-top: 15px;
+    margin-left: 40px;
+ }
+
+ .issue4{
+    margin: 15px 40px;
+ }
+
+
+.issue4 input{
+    width: 293px;
+    height: 30px;
+}
+
+ .issue5{
+    margin: 15px 40px;
+ }
+
+ .issue6{
+    margin: 15px 40px;
+ }
+
+ .issue6 input{
+    width: 292px;
+    height: 30px;
+ }
+
+ .issue7{
+    margin: 15px 40px;
+ }
+
+ .issue8{
+    margin: 15px 40px;
+ }
+
+.issue8 select{
+    width: 300px;
+    height: 40px;
+}
+
+ .issue9{
+    margin: 15px 40px;
+ }
+
+ .issue10{
+    margin: 15px 40px;
+    box-sizing: border-box;
+    
+ }
+
+ .issue10 input{
+    width: 293px;
+    height: 30px;
+ }
+
+ .issue11{
+    margin: 25px 40px;
+   
+}
+
+.issue11 input{
+    height: 30px;
+    background-color: aqua;
+    border: 1px solid ;
+}
+
+/* view certificate */
+.certificate1{
+    border: 2px solid black;
+    width: 400px;
+    height: 600px;
+
+}
+
+.view2 img{
+    width: 200px;
+    height: 200px;
+}
+
+
+.view1{
+    margin-top: 300px;
+    margin-left: 40px;
+    margin-top: 100px;
+    
+}
+
+.view1 h1{
+    color: black;
+}
+
+
+.view3{
+    margin-top: 10px;
+    margin-left: 45px;
+}
+
+.view4{
+    margin-top: 10px;
+    margin-left: 50px;
+}
+
+.view5{
+    margin-top: 10px;
+    margin-left: 45px;
+}
