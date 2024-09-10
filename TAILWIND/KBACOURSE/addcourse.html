@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Add Course</title>
+</head>
+<body >
+    <div class="bg-pink-100 h-16 mt-1">
+        
+            
+            <nav class="flex float-right mr-6 mt-4 ">
+                <div>
+                <a href="home.html" >Home</a>
+                    <a href="Course.html" class="ml-6">Courses</a>
+                    <a href="contactus.html" class="ml-6">Contact Us</a>
+                    <a href="addcourse.html" class="ml-6">Add Course</a>
+                    <a href="#logout" class="ml-6">Logout</a>
+              </div>  
+            </nav>
+            <img src="firstimg.png" class="max-w-12 mt-4">
+        
+    </div>
+
+
+
+    <div class="bg-slate-200 max-w-md  p-14   justify-center mt-32 mx-96 rounded-lg shadow-xl shadow-indigo-400 ">
+        <h1 class="text-2xl mt-2 text-center m-9">Add Course</h1>
+        <div class=" indent-7">Course Name</div>
+        <div class="indent-7 mt-2"><input type="text" placeholder="eg.Certified Blockchain Associate" class="h-9 w-10/12 hover:ring-4 ring-indigo-300"></div>
+        <div class="mt-4 indent-7">Course Id</div>
+        <div class="mt-2 indent-7"><input type="text" placeholder="eg.1" class="h-9 w-10/12 hover:ring-4 ring-indigo-300"></div>
+        <div class="mt-4 indent-7">Course Type</div>
+        <div class="mt-2 indent-7 ">
+            <select class="h-9 w-10/12 hover:ring ring-indigo-300 bg-white">
+                <option value="self-paced" class="">Self-Paced</option>
+
+            </select>
+            
+        </div>
+        <div class="mt-4 indent-7">Description</div>
+        <div class="mt-2 indent-7 hover:ring-4  ring-indigo-300"><textarea rows="5" cols="27"  placeholder="Small description on the course" ></textarea></div>
+        <div class="mt-4 indent-7">Price</div>
+        <div class="m-2 indent-5 ">
+            <select class="h-9 w-72 bg-white hover:ring-4 ring-indigo-300">
+                <option value="5000">Rs. 5000</option>
+            </select>
+        </div>
+        <div class="mt-4 text-center mr-24"><button class="mt-1.5 float-right border border-slate-950  w-7/12">Add Course</button></div>
+    </div>
+    
+</body>
+</html>
