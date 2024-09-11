@@ -1,0 +1,333 @@
+/* Index Page */
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+CU:wght@100..400&display=swap');
+:root{
+    --first:#EEEEEE;
+    --second:#64CCC5;
+    --third: #176B87;
+    --forth:#053B50;
+}
+
+body{
+    padding: 0;
+    margin: 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    /* font-family: "Playwrite CU", cursive; */
+}
+
+.Index{
+    width: 100%;
+    height: 70px;
+    /* box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px; */
+}
+.Index nav{
+    float: right;
+}
+.Index nav ul{
+    display: flex;
+    list-style-type: none;
+}
+.Index nav ul li{
+    padding-left: 15px;
+    margin-right: 10px;
+    padding-top: 10px;
+}
+.Index nav ul li a{
+    text-decoration: none;
+    color: var(--forth) ;
+    font-size: 16px;
+    transition: 0.8s;
+    font-weight: bold;
+    
+}
+.Index nav ul li a:hover{
+    color: var(--second);
+    font-size: 20px;
+}
+
+
+.Index1{
+    width:100%;
+    height: 40vh;
+    background-color: var(--forth);
+    
+}
+.Index1 .text{
+    padding-left: 70px;
+    padding-top: 5%;
+
+}
+
+.Index1 span{
+    color: #EEEEEE;
+    font-size: 90px;
+    
+}
+
+.Index2{
+    width:100%;
+    height: 320px;
+    background-image: url(../IMG/img1.jpg);
+    background-size: cover;
+    background-position: top;
+}
+
+/* Add Book */
+
+.Addcourse{
+    background-color: var(--third);
+    width: 100%;
+    height: 100vh;
+    padding: 80px;
+     
+}
+
+ .add{
+    width: 400px;
+    height: 500px;
+    background-color:var(--forth);
+    margin-left: 25%;
+    color: white;
+    padding: 80px;
+    box-shadow: 0 45px 65px rgba(0,0,0,0.50), 0 35px 22px rgba(0,0,0,0.16);
+   
+ }
+
+.add .text1{
+    font-size: 50px;
+    
+
+}
+
+.add div {
+    margin-top: 10px;
+}
+
+.add .text2{
+    font-size: 20px;
+    
+
+}
+
+.add .text3{
+    width: 335px;
+    height: 30px;
+}
+
+.add .text4{
+    width:340px;
+    height: 40px;
+}
+
+.add .text5{
+    
+    padding: 10px;
+    padding-left: 140px;
+   
+}
+
+.add input{
+    height: 30px;
+    width: 90px;
+}
+
+/* View Book */
+
+.view{
+    width: 100%;
+    height: 650px;
+    background-color:#64CCC5;
+padding: 50px;
+margin-left: 90px;
+padding-left: 100px;
+display: flex;
+}
+
+.view img{
+   width: 130px;
+   margin-right: 10px;
+    padding: 30px;
+   
+
+
+}
+
+.view1{
+    background-color: var(--forth);
+    width: 230px;
+    height: 310px;
+    padding: 30px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 45px 65px rgba(0,0,0,0.50), 0 35px 22px rgba(0,0,0,0.16);
+}
+
+.view1 button{
+    height: 30px;
+    width:100px;
+    color: var(--forth);
+    
+}
+
+.view1 .div1{
+    padding: 10px;
+}
+
+.view1 .view2{
+    color: #EEEEEE;
+
+}
+
+
+
+.view .view5 {
+    background-color: var(--forth);
+    width: 230px;
+    height: 310px;
+    padding: 30px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 45px 65px rgba(0,0,0,0.50), 0 35px 22px rgba(0,0,0,0.16);
+    margin-left: 20px;
+
+}
+
+.view5 .view2{
+    color: #EEEEEE;
+}
+
+.view .view5 img{
+    width: 125px;
+    
+}
+.view5 button{
+    height: 30px;
+    width:100px;
+    color: var(--forth)
+}
+
+.view5 .div2{
+    padding: 10px;
+}
+/* Sign in page */
+
+.sign{
+    width: 100%;
+    height: 800px;
+    background-color: var(--forth);
+    color: #EEEEEE;
+    padding: 50px;
+
+}
+.sign1{
+    background-color:var(--first);
+    width: 330px;
+    height: 400px;
+    
+    margin-left: 25%;
+    color:var(--forth);
+   
+    box-shadow: 0 45px 65px rgba(0,0,0,0.50), 0 35px 22px rgba(0,0,0,0.16);
+    padding: 50px;
+}
+
+.sign1 .txt1{
+    font-size: 50px;
+}
+
+.sign1 div {
+    margin-top: 10px;
+}
+
+.sign1 .txt2{
+    font-size: 20px;
+}
+
+.sign1 .txt3{
+    width: 300px;
+    height: 25px;
+}
+
+.sign1 .txt4{
+    margin-top: 30px;
+    margin-left: 90px;
+    width: 150px;
+    height: 30px;
+    background-color: var(--forth);
+    color: #EEEEEE;
+}
+
+.sign1 .txt5{
+    padding:20px;
+    text-align: center;
+    padding-right: 9px;
+    font-size: 13px;
+    color: #64CCC5;
+}
+
+.sign1 .txt6{
+    text-align: center;
+}
+
+.sign1 .txt6 a{
+    color: #64CCC5;
+}
+
+
+/* Sign up page */
+
+.class1{
+    background-color: var(--third);
+    width: 100%;
+    height: 800px;
+    padding: 80px;
+}
+
+.up1{
+    background-color:var(--first);
+    width: 320px;
+    height: 450px;
+    
+    margin-left: 25%;
+    color:var(--forth);
+   
+    box-shadow: 0 45px 65px rgba(0,0,0,0.50), 0 35px 22px rgba(0,0,0,0.16);
+    padding: 80px;
+}
+
+.up1 .lp1{
+    font-size: 50px;
+}
+
+.up1 div {
+    margin-top: 10px;
+}
+
+.up1 .lp2{
+    font-size: 20px;
+}
+
+.up1 .lp3{
+    width: 300px;
+    height: 25px;
+}
+ .up1 .lp4{
+    width: 310px;
+    height: 35px;
+ }
+
+ .up1 .lp5 button{
+    margin-top: 30px;
+    margin-left: 90px;
+    width: 150px;
+    height: 30px;
+    background-color: var(--forth);
+    color: #EEEEEE;
+ }
+
+ .up1 .lp6{
+    text-align: center;
+ }
+
+ .up1 .lp6 a{
+    color: #64CCC5;
+ }
