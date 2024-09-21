@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="/CSS/KBACOURSES/STYLE/Library Management/CSS/style.css"> -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Add Book</title>
+</head>
+<body>
+    <div class="bg-emerald-950 text-white flex justify-end space-x-3 py-6 pr-4 font-serif ">
+        <a href="/TAILWIND/KBACOURSE/LIBARAY/index.html">HOME</a>
+        <a href="/TAILWIND/KBACOURSE/LIBARAY/HTML/addbook.html">ADD BOOK</a>
+        <a href="/TAILWIND/KBACOURSE/LIBARAY/HTML/viewbook.html">VIEW BOOK</a>
+        <a href="/TAILWIND/KBACOURSE/LIBARAY/HTML/signin.html">SIGN IN</a>
+        <a href="/TAILWIND/KBACOURSE/LIBARAY/HTML/signup.html">SIGN UP</a>
+
+    </div>
+    
+    <div class="bg-slate-300 h-[96vh] flex justify-center py-7">
+        <div class="bg-teal-700 w-[70vh] h-[90vh] rounded-lg shadow-2xl shadow-green-950 ">
+            <div class="p-5  font-serif  ">
+                <div class="text-3xl text-center pt-2 text-emerald-100"><span>Add Book</span></div>
+                <div class="pt-6 text-emerald-100 pl-16 " ><span>Book Name</span></div>
+                <div class="pt-2 pl-16  w-[10vh] "><input type="text" placeholder="Enter book name" class="w-[44vh] h-[5vh]" required></div>
+                <div class="pt-4 text-emerald-100 pl-16"><span>Book Id</span></div>
+                <div class="pt-2 text-black pl-16"><input type="text" placeholder="Enter book Id" class="w-[44vh] h-[5vh]" required></div>
+                <div class="pt-4 text-emerald-100 pl-16"><span>Book Type</span></div>
+                <div class="pt-2 text-black pl-16">
+                    <select class="w-[44vh] h-[5vh] bg-white">
+                        <option value="select" >Select</option>
+                        <option value="select">Book 1</option>
+                        <option value="select">Book 2</option>
+                    </select>
+                 </div>
+                 <div class="text-emerald-100 pl-16 pt-4"><span>Description</span></div>
+                 <div class="pt-2 pl-16"><Textarea  placeholder="Enter your message"  rows="3px" cols="30px" required></Textarea></div>
+                 <div class="text-emerald-100 pt-4 pl-16"><span>Price</span></div>
+                 <div class="pt-2 pl-16">
+                    <select class="w-[44vh] h-[5vh] bg-white" required>
+                        <option value="select">Select</option>
+                        <option value="select">15000/-</option>
+                        <option value="select">10000/-</option>
+                    </select>
+                </div>
+                <div class="text-emerald-100 flex justify-center  bg-emerald-950  w-[20vh] h-[5vh] mt-4 ml-36"><input type="button" value=" Add Book" ></div>
+            </div>
+        </div>
+     </div>
+    
+</body>
+</html>
