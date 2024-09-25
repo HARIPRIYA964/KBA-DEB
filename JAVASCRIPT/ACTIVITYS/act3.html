@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS</title>
+</head>
+<body>
+   <h3>1. Program to print a para about yourself using createElement() , textContent & append child.</h3>
+    <div id="mydiv">
+        <h1>About Myself</h1>
+    </div>
+    <script>
+        let element=document.createElement("p");
+        element.innerHTML="Hello! My name is Sneha,and i'm currently studying at KBA";
+        document.getElementById("mydiv").appendChild(element);
+        
+    </script>
+   <h3>2. Make an unordered list of cinemas on html page using javascript.</h3>
+    <h1>List of Cinemas</h1>
+    <ul id="cinemaList"></ul>
+    <script>
+
+         const cinemaList= document.getElementById("cinemaList");
+
+         const cinema1=document.createElement("li");
+         cinema1.textContent="PVR";
+         cinemaList.appendChild(cinema1);
+
+         const cinema2=document.createElement("li");
+         cinema2.textContent="INOX";
+         cinemaList.appendChild(cinema2);
+
+         const cinema3=document.createElement("li");
+         cinema3.textContent="ARIES PLEX";
+         cinemaList.appendChild(cinema3);
+
+         const cinema4=document.createElement("li");
+         cinema4.textContent="CINEPOLIS";
+         cinemaList.appendChild(cinema4);
+    </script>
+
+    <h3>3. Create a dropdown for programming language classes offered on html page using javascript.</h3>
+    <h1>Select One</h1>
+    <select id="plDropdown"></select>
+    <script>
+
+     const dropdown= document.getElementById("plDropdown");
+
+     const option1=document.createElement("option");
+     option1.value="classlistdiv";
+     option1.textContent="classlistdiv";
+     dropdown.appendChild(option1);
+
+     const option2=document.createElement("option");
+     option2.value="classitems";
+     option2.textContent="classitems";
+     dropdown.appendChild(option2);
+
+     const option3=document.createElement("option");
+     option3.value="classinfo";
+     option3.textContent="classinfo";
+     dropdown.appendChild(option3);
+     </script>
+
+    <h3>Create a dropdown containing name of books on the book shop page after List of Book heading.</h3>
+    <h1>Books</h1>
+    <select id="bkDropdown"></select>
+    <script>
+
+     const  Dropdown= document.getElementById("bkDropdown");
+
+     const option4=document.createElement("option");
+     option4.value="KAFKA ON THE SHORE";
+     option4.textContent="KAFKA ON THE SHORE";
+     Dropdown.appendChild(option4);
+
+     const option5=document.createElement("option");
+     option5.value="MERCURY ISLAND";
+     option5.textContent="MERCURY ISLAND";
+     Dropdown.appendChild(option5);
+
+     const option6=document.createElement("option");
+     option6.value="ATOMIC HABITS";
+     option6.textContent="ATOMIC HABITS";
+     Dropdown.appendChild(option6);
+     </script>
+
+<h3>4. On the KBA site you created add a radio button showing your experience on KBA(like good, bad, average).</h3>
+ <br>
+ <br>
+ <br>
+
+    <!-- <input type="radio" 
+     name=value value="good">good
+    <input type="radio" name="value" value="bad">bad
+    <input type="radio" name="value" value="average">average
+     <script>
+
+     </script> -->
+
+     <div id="exp">
+        
+     </div>
+
+    <h3>5.Create a dropdown for list of cakes and print the value of second option</h3>
+    <h1>Select One</h1>
+    <select id="cDropdown"></select>
+    <script>
+
+    const dropDown= document.getElementById("cDropdown");
+
+    const cake1=document.createElement("option");
+    cake1.value="blackforest";
+    cake1.textContent="blackforest";
+    dropDown.appendChild(cake1);
+
+    const cake2=document.createElement("option");
+    cake2.value="whiteforest";
+    cake2.textContent="whiteforest";
+    dropDown.appendChild(cake2);
+
+    const cake3=document.createElement("option");
+    cake3.value="redvelvet";
+    cake3.textContent="redvelvet";
+    dropDown.appendChild(cake3);
+
+    document.write(`selected:`,cake2.value)
+    </script>
+
+    <h3>6. Print your full name storing fname & lname. Print in Uppercase.</h3>
+    <script>
+        let name="Haripriya s";
+        document.write("<br>",name.toUpperCase());
+    </script>
+
+    <h3>7. You can study anything if you have a will to do it”.Take the substrings “You can study”, “you”,”will”,”do it” and combine as a sentence.</h3>
+    <script>
+        let sentence1="You can study anything if you have a will to do it"
+        //using slice function
+        sentence1=sentence1.slice(0,13)+sentence1.slice(25,29)+sentence1.slice(36,41)+sentence1.slice(44,50);
+        document.write("<br>","the substring is:",sentence1,"<br>")
+    </script>
+
+    <h3>8. MongoDB is a decentralised distributed ledger.MongoDB can eliminate centralisation.” Replace MongoDB with Blockchain.</h3>
+    <script>
+        let originaltext="MongoDB is a decentralised distributed ledger . MongoDB can eliminate centralisation.";
+        let newtext=originaltext.replace(/MongoDB/g,"Blockchain"); // /g is a flag used to perform global serach.this means tht the regular exp will replace all the occurrance of  a match in str.
+        document.write(newtext,"<br>")
+    </script>
+<!-- Print the string “MongoDB is a decentralised distributed ledger” using substring/substr. -->
+    <script>
+        let text="MongoDB is a decentralised distributed ledger";
+        document.write(text.substring(0,45),"<br>");
+        document.write(text.substr(0,45),"<br>");
+    </script>
+
+<!-- Compare “Hello World” & “hEllO World” and display the result & its type. -->
+    <script>
+    const str1 = "Hello World";
+    const str2 = "hEllO World";
+    const result = str1 === str2;
+    const type1 = typeof str1;   
+    const type2 = typeof str2; 
+    document.write("<br> result is:",result);
+    document.write("<br>type is:",type1);
+    document.write("<br>type is:",type2)
+    </script>
+
+<!-- Print this statement “ I am ___ yrs of old and my brother is 10 yrs older to me. He is now __ years old.” -->
+    <script>
+        const myAge = 20;
+        const brotherAge = myAge + 10;
+
+        const statement = `<br>I am ${myAge} yrs old and my brother is 10 yrs older than me. He is now ${brotherAge} years old.`;
+
+        document.write(statement);
+    </script>
+
+<!-- Consider this statement “ My name is ________.(declaring fname & lastname in uppercase). I live in ____(uppercase). -->
+    <script>
+        const fname = "Haripriya".toUpperCase();
+        const lastname = "S".toUpperCase();
+        const city = "Palakkad".toUpperCase(); 
+
+        const statementx = `<br>  My name is ${fname} ${lastname}. I live in ${city}.`;
+
+        document.write(statementx);
+    </script>
+
+<!-- Consider these two statements “I like to play video games.” “I don’t like Hide & seek”. Change 'like' to 'don't like'. -->
+
+    <script>
+        let statement1 = "I like to play video games.";
+        let statement2 = "I don't like Hide & seek.";
+
+// Change 'like' to 'don't like'
+    statement1 = statement1.replace("like", "don't like");
+    statement2 = statement2.replace("like", "don't like");
+    document.write("<br>" ,statement1);
+    document.write("<br>",statement2);
+    </script>
+</body>
+</html>
