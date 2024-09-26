@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let a=[1,2,3,4]
+        a.push(5);
+        document.write(a)
+        a.pop();
+        document.write("<br>",a);
+        let b=a.toString();
+        document.write("<br>",b[1])
+        let c=[5,6,7,8];
+        let d=a.concat(c);
+        document.write("<br>",d);
+        c.splice(2,0,2,3)
+        document.write("<br>",c)
+        let k=c.slice(2,4);
+        document.write("<br>",k)
+        document.write("<br>", c.reverse());
+        document.write("<br>", c.sort())
+        let n=c.indexOf(6);
+        document.write("<br>",n)
+        document.write("<br>", c.join('*'))
+    </script>
+</body>
+</html>

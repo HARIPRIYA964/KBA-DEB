@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let a=[2,3,4,5];
+        let b=[3,4,5,6];
+        let c=[];
+        for(i=0;i<4;i++){
+            c[i]=a[i]+b[i]
+        }
+        let sum=0;
+        for(x in c){
+            
+            document.write(c[x])
+            sum=sum+c[x];
+
+        }
+        document.write("<br>","sum is: ",sum)
+        // for(x of c){
+        //     document.write("<br>",x)
+        // }
+
+    </script>
+  
+</body>
+</html>
