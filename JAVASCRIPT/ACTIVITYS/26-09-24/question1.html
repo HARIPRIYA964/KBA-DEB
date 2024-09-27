@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>1.Enter a list/array of films you like</h3>
+    <script>
+        let a=["&nbsp &nbsp Vazha",
+        "Interstellar",
+        "Kingdom of the Planet of the Apes",
+        "Evil Dead Rise",
+        "ARM",
+        "Inside the Mind of a Dog",
+        "Never let go",
+        "The Mother","The Super Mario Bros."]
+        document.write("&nbsp &nbsp a. From the list find the position of your favourite film <br>")
+        
+        let n=a.indexOf("Evil Dead Rise")
+        document.write("&nbsp &nbsp My Favourite movie position:",n,"<br><br>")
+
+        document.write("&nbsp &nbsp b. Add one more film to the list<br>")
+        a.push("The Fallout")
+        document.write(a,"<br><br>")
+
+        document.write("&nbsp &nbsp c. Pop one film from the list <br>")
+        a.pop()
+        document.write(a,"<br><br>")
+
+        document.write("&nbsp &nbsp d. Delete the least interested film from the list <br>")
+        a.splice(1,1)
+        document.write(a,"<br><br>")
+
+        document.write("&nbsp &nbsp c. Make a different list from 3rd position to 6th position <br>")
+        let k= a.slice(3,7)
+        document.write("&nbsp &nbsp",k,"<br><br>")
+
+        document.write("&nbsp &nbsp d. Search whether ARM is on your list <br>")
+        let m=a.indexOf("ARM")
+        document.write("&nbsp &nbsp &nbsp &nbsp",m)
+       
+
+        
+           
+           
+        
+    </script>
+</body>
+</html>
