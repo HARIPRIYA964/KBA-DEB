@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let a=[[],[],[]]
+        for(i=0; i<3; i++){
+            document.write("<br>")
+            for(j=0; j<3; j++){
+                a[i][j]=1
+                document.write(" &nbsp")
+                document.write(a[i][j])
+
+            }
+        }
+        document.write("<br>")
+   
+        let b=[[],[],[],[]]
+        for(i=0; i<3;i++){
+            document.write("<br>")
+            for(j=0; j<=3; j++){
+                b[i][j]= i+1;
+                document.write(" ")
+                document.write(b[i][j])
+            }
+            
+        }
+
+        document.write("<br>")
+
+    
+        let c=[[],[],[],[]]
+        num=0
+        for(i=0; i<3; i++){
+            document.write("<br>")
+            for(j=0; j<4; j++){
+                num=num+2
+                c[i][j]=num
+               document.write(" ")
+               document.write(c[i][j])
+
+            }
+        }
+        document.write("<br>")
+        let d=[[],[],[],[]]
+        for(i=0; i<3; i++){
+            document.write("<br>")
+            for(j=0;j<4; j++){
+                d[i][j]= b[i][j]+c[i][j]
+                document.write(" ")
+               document.write(d[i][j])
+            }
+        }
+        document.write("<br>")
+        let rows=3;
+        let cols=4;
+        let e=[];
+        for(i=0;i<cols;i++){
+            e[i]=[];
+            for(j=0; j<rows; j++){
+                
+                document.write(" ")
+               document.write(e[i][j]= d[j][i]);
+            }
+            document.write("<br>")
+        }
+
+    </script>
+   
+</body>
+</html>
