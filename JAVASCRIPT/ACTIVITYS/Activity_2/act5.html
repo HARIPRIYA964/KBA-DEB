@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>quadratic equation</title>
+</head>
+<body>
+    <h3>Write a program to calculate the root of a quadratic equation.</h3>
+    <script>
+        
+        let a=3; b=7; c=5;
+        document.write("<br>The quadratic equation is : ",a, "x<sup>2</sup> + ",b, "x + ",c)
+        
+        let d=(b*b) - (4*a*c)
+        document.write("<br><br> Discriminant :",d)
+
+        if(d>0){
+            let r1=(-b) + (Math.sqrt(d)) / (2*a); //d de square root 
+            let r2=(-b) - (Math.sqrt(d)) / (2*a);
+            document.write("roots are real and distinct: <br> root1 :",r1, "<br>root2 :",r2)
+        }
+        else if(d==0){
+            let r1 = (-b) / (2*a);
+
+            document.write("<br> roots are real and identical : <br> root1 :".r1)
+        }
+        else{
+            document.write("<br> roots are complex")
+        }
+        
+    </script>
+</body>
+</html>

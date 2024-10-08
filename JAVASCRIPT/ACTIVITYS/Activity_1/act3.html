@@ -12,7 +12,7 @@
     </div>
     <script>
         let element=document.createElement("p");
-        element.innerHTML="Hello! My name is Sneha,and i'm currently studying at KBA";
+        element.innerHTML="Hello! My name is Haripriya ,and i'm currently studying at KBA";
         document.getElementById("mydiv").appendChild(element);
         
     </script>
@@ -42,10 +42,10 @@
 
     <h3>3. Create a dropdown for programming language classes offered on html page using javascript.</h3>
     <h1>Select One</h1>
-    <select id="plDropdown"></select>
+    <select id="Dropdown"></select>
     <script>
 
-     const dropdown= document.getElementById("plDropdown");
+     const dropdown= document.getElementById("Dropdown");
 
      const option1=document.createElement("option");
      option1.value="classlistdiv";
@@ -86,22 +86,30 @@
      Dropdown.appendChild(option6);
      </script>
 
-<h3>4. On the KBA site you created add a radio button showing your experience on KBA(like good, bad, average).</h3>
- <br>
- <br>
- <br>
-
-    <!-- <input type="radio" 
-     name=value value="good">good
-    <input type="radio" name="value" value="bad">bad
-    <input type="radio" name="value" value="average">average
-     <script>
-
-     </script> -->
-
-     <div id="exp">
+<h3>4. On the KBA site you created add a radio button showing your experience on KBA(like good, bad, average).</h3> <br>
         
-     </div>
+ <div  id="radio">  </div>
+ <script>
+     let  radio= document.getElementById("radio");
+     
+     let radio1=document.createElement("input");
+     radio1.type="radio";
+     radio1.name="feedback";
+     radio.appendChild(radio1);
+     radio.appendChild(document.createTextNode("Good"));
+ 
+     let radio2=document.createElement("input");
+     radio2.type="radio";
+     radio2.name="feedback";
+     radio.appendChild(radio2);
+     radio.appendChild(document.createTextNode("Bad"));
+ 
+     let radio3=document.createElement("input");
+     radio3.type="radio";
+     radio3.name="feedback";
+     radio.appendChild(radio3);
+     radio.appendChild(document.createTextNode("Average"));
+  </script>
 
     <h3>5.Create a dropdown for list of cakes and print the value of second option</h3>
     <h1>Select One</h1>
@@ -148,14 +156,14 @@
         let newtext=originaltext.replace(/MongoDB/g,"Blockchain"); // /g is a flag used to perform global serach.this means tht the regular exp will replace all the occurrance of  a match in str.
         document.write(newtext,"<br>")
     </script>
-<!-- Print the string “MongoDB is a decentralised distributed ledger” using substring/substr. -->
+<h3> 9.Print the string “MongoDB is a decentralised distributed ledger” using substring/substr. </h3><br>
     <script>
         let text="MongoDB is a decentralised distributed ledger";
         document.write(text.substring(0,45),"<br>");
         document.write(text.substr(0,45),"<br>");
     </script>
 
-<!-- Compare “Hello World” & “hEllO World” and display the result & its type. -->
+<h3>10.Compare “Hello World” & “hEllO World” and display the result & its type.</h3>
     <script>
     const str1 = "Hello World";
     const str2 = "hEllO World";
@@ -167,7 +175,7 @@
     document.write("<br>type is:",type2)
     </script>
 
-<!-- Print this statement “ I am ___ yrs of old and my brother is 10 yrs older to me. He is now __ years old.” -->
+<h3>11.Print this statement “ I am ___ yrs of old and my brother is 10 yrs older to me. He is now __ years old.” </h3>
     <script>
         const myAge = 20;
         const brotherAge = myAge + 10;
@@ -177,7 +185,7 @@
         document.write(statement);
     </script>
 
-<!-- Consider this statement “ My name is ________.(declaring fname & lastname in uppercase). I live in ____(uppercase). -->
+<h3>12.Consider this statement “ My name is ________.(declaring fname & lastname in uppercase). I live in ____(uppercase).</h3>
     <script>
         const fname = "Haripriya".toUpperCase();
         const lastname = "S".toUpperCase();
@@ -188,7 +196,7 @@
         document.write(statementx);
     </script>
 
-<!-- Consider these two statements “I like to play video games.” “I don’t like Hide & seek”. Change 'like' to 'don't like'. -->
+<h3>13.Consider these two statements “I like to play video games.” “I don’t like Hide & seek”. Change 'like' to 'don't like'.</h3>
 
     <script>
         let statement1 = "I like to play video games.";
