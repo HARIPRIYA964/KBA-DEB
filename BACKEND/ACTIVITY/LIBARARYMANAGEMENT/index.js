@@ -1,10 +1,32 @@
-import express from 'express'; //express file is  importing 
+import express,{json} from 'express'; 
+import bcrypt from 'bcrypt';
 
 const app = express();
+app.use(json())
+
 const port = 8000;
-//listen cheyyumpol 2 para kodukkanam 
-//1.port a(ath port aanu work akunnath)
-//2.ethenkillum oru function here using arrow function
-app.listen(port,()=>{
-    console.log(`Server is listening to ${port}`)
+const user = new Map()
+
+app.post('/signup',async(req,res)=>{
+    const data = req.body;
+     const {
+        FirstName,
+        LastName,
+        UserName,
+        Password,
+        Role} = data;
+        if(user.has(UserName)){
+            res.status(400).json({messsage:'already exist!'})
+        }
+        else{
+            const newp = await bcrypt.hash(Password,10);
+            user.set(UserName,{FirstName,LastName,Password:newp,Role})
+            console.log(user.get(UserName));
+            res.status(201).json({messsage :'Data saved!'})
+        }
+
+
+        
 })
+
+
