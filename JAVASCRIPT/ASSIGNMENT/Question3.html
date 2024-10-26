@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Answer3</title>
+    <script>
+        function comparison(){
+            const fnum =parseFloat(document.getElementById("fnum").value);
+            const snum = parseFloat(document.getElementById("snum").value);
+            const result=document.getElementById("result");
+            if(fnum > snum){
+                result.textContent=(`first number ${fnum} is greater than ${snum}`)
+            }
+            else if(fnum < snum){
+                result.textContent=(`first number ${fnum} is less than ${snum}`)
+            }
+            else{
+                
+                result.textContent=(`first number ${fnum} is equal ${snum}`)
+            }
+            
+
+            }
+
+        
+    </script>
+</head>
+<body>
+    <label>First Number</label>
+    <input type="number" id="fnum"><br><br>
+    <label>Second Number</label>
+    <input type="number" id="snum"><br><br>
+    <button onclick="comparison()">Compare</button>
+    <p id="result"></p>
+
+    
+</body>
+</html>

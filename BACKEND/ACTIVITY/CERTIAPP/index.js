@@ -1,5 +1,6 @@
 import express, { json } from 'express';
-import { adminroute } from '../../CLASSWORK/Routes/adminroutes.js';
+import { adminroute } from '../CERTIAPP/Routes/adminroute.js';
+
 
 
 const app = express();

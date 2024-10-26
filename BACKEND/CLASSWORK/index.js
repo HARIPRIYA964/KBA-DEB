@@ -1,13 +1,21 @@
 import express,{json} from 'express'; //express file is  importing 
-
 import { adminroute } from './Routes/adminroutes.js';
+import cors from 'cors'
+import cookieParser from 'cookie-parser';
 
+const port = process.env.Port;
 
 const app = express();
+app.use(cors({
+    origin:'http://127.0.0.1:5500',      // or // 'http://127.0.0.1:5000'
+    credentials : true
+}))
 app.use(json())
+app.use(cookieParser());
 app.use('/',adminroute)
 
-const port = 3000;
+
+
 // const user = new Map()
 //listen cheyyumpol 2 para kodukkanam 
 //1.port a(ath port aanu work akunnath)

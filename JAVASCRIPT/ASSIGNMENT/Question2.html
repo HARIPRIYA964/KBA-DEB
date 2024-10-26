@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div>
+            <label for="name">Name</label>
+            <input type="text" id="name">
+        </div><br><br>
+        <div>
+            <label for="description">Description</label>
+            <textarea id="description"></textarea>
+        </div><br>
+
+        <div class="otherCoursesDiv">
+            <div>
+                <input type="radio" name="course" value="Btech" onclick="toggleDropdown()">
+                <label for="Btech">Btech</label>
+            </div>
+
+            <div>
+                <input type="radio" name="course" value="Mtech" onclick="toggleDropdown()">
+                <label for="Mtech">Mtech</label>
+            </div>
+
+            <div>
+                <input type="radio" name="course" value="MCA" onclick="toggleDropdown()">
+                <label for="MCA">MCA</label>
+            </div>
+
+            <div>
+                <input type="radio" name="course" value="Others" id="Others" onclick="toggleDropdown()">
+                <label for="Others">Others</label>
+            </div>
+        </div>
+
+        <!-- Dropdown to show when 'Others' is selected -->
+        <div id="otherCoursesDropdown" class="hidden">
+            <label for="otherCourses">Select Other Course:</label>
+            <select id="otherCourses">
+                <option value="BCA">Btech</option>
+                <option value="PGDCA">Mtech</option>
+                <option value="BCom">MCA</option>
+                <option value="MPhil">MPhil</option>
+            </select>
+        </div>
+    </div>
+
+    <script>
+        function toggleDropdown() {
+            const otherCoursesDropdown = document.getElementById('otherCoursesDropdown');
+            const othersRadio = document.getElementById('Others');
+
+            if (othersRadio.checked) {
+                otherCoursesDropdown.classList.remove('hidden');  
+            } else {
+                otherCoursesDropdown.classList.add('hidden');   
+            }
+        }
+    </script>
+</body>
+</html>

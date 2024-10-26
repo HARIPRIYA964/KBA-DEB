@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <div>
+            <label for="element">
+                <input type="text" id="element" placeholder="Enter a number">
+            </label>
+            <button onclick="add()">Add</button>
+        </div>
+
+        <div>
+            <label for="search">
+                Search:
+                <input type="text" id="search" oninput="searchArray()" placeholder="Search for a number">
+            </label>
+            <p id="searchResult"></p>
+        </div>
+
+        <div>
+            <p>Entered array: <span id="entered"></span></p>
+            <p>Sorted array: <span id="sorted"></span></p>
+            <p>Reversed array: <span id="reverse"></span></p>
+        </div>
+    </div>
+
+    <script>
+        let array = [];  
+
+        function add() {
+            let element = document.getElementById("element").value;
+            let num = Number(element);
+            if (!isNaN(num)) { 
+                array.push(num);
+                updateDisplay();
+            } else {
+                alert("Please enter a valid number.");
+            }
+            document.getElementById("element").value = ""; 
+        }
+
+        function updateDisplay() {
+            document.getElementById("entered").textContent = array.join(", ");
+            document.getElementById("sorted").textContent = [...array].sort().join(", ");
+            document.getElementById("reverse").textContent = [...array].reverse().join(", ");
+        }
+
+        function searchArray() {
+            let searchInput = document.getElementById("search").value;
+            let num = Number(searchInput);
+            if (!isNaN(num)) {
+                if (array.includes(num)) {
+                    document.getElementById("searchResult").textContent = `${num} is in the entered array.`;
+                } else {
+                    document.getElementById("searchResult").textContent = `${num} is not in the entered array.`;
+                }
+            } else {
+                document.getElementById("searchResult").textContent = ""; 
+            }
+        }
+    </script>
+</body>
+</html>
