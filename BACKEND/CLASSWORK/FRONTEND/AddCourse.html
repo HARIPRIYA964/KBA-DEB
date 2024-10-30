@@ -9,7 +9,70 @@
 </head>
 
 <script>
-    
+    async function addCourse(event){
+        event.preventDefault();
+        const Name = document.getElementById('name').value
+        const Id = document.getElementById('Id').value
+        const Type = document.getElementById('type').value
+        const Description = document.getElementById('description').value
+        const Price = document.getElementById('price').value
+
+        console.log(Name,Id,Type,Description,Price);
+
+        // Store course data in local storage
+        const courseData = {CourseName: Name,CourseType: Type,Description: Description,Price: Price};
+        localStorage.setItem(Id, JSON.stringify(courseData));
+
+        try {
+            const response = await fetch("http://127.0.0.1:3000/AddCourse",{
+            method : 'POST',
+            credentials : 'include',
+            headers: {
+                'Content-Type' : 'application/json'
+            },
+            body : JSON.stringify({
+                CourseName : Name,
+                CourseId : Id,
+                CourseType :Type,
+                Description : Description,
+                Price : Price
+            })
+        })
+        console.log(response.status)
+        if (response.status == 201){
+            window.location.href = "./home.html"
+            alert('Course Added successfully');
+            // // localStorage
+            // let courses=JSON.parse(localStorage.getItem('courses'))||[];
+            // const newCourse= {
+            //     CourseName : Name,
+            //     CourseId : Id,
+            //     CourseType :Type,
+            //     Description : Description,
+            //     Price : Price
+            // }
+            // courses.push(newCourse)
+            // localStorage.setItem('courses',JSON.stringify(courses))
+            // console.log("Course Added successfully")
+        }
+        else if(response.status == 400){
+            alert('course already exist')
+        }
+
+        else{
+            alert('server Error...Try after sometime')
+        }
+        const data = await response.json();
+        console.log(data)
+            
+        } catch (error) {
+            
+        }
+
+        
+}
+
+     
 </script>
 
 
@@ -30,31 +93,33 @@
 
 
 
-    <div class="bg-slate-200 max-w-md  p-14   justify-center mt-32 mx-96 rounded-lg shadow-xl shadow-indigo-400 ">
-        <h1 class="text-2xl mt-2 text-center m-9">Add Course</h1>
-        <div class=" indent-7">Course Name</div>
-        <div class="indent-7 mt-2"><input type="text" placeholder="eg.Certified Blockchain Associate" class="h-9 w-10/12 hover:ring-4 ring-indigo-300"></div>
-        <div class="mt-4 indent-7">Course Id</div>
-        <div class="mt-2 indent-7"><input type="text" placeholder="eg.1" class="h-9 w-10/12 hover:ring-4 ring-indigo-300"></div>
-        <div class="mt-4 indent-7">Course Type</div>
-        <div class="mt-2 indent-7 ">
-            <select class="h-9 w-10/12 hover:ring ring-indigo-300 bg-white">
-                <option value="self-paced" class="">Self-Paced</option>
-
-            </select>
-            
-        </div>
-        <div class="mt-4 indent-7">Description</div>
-        <div class="mt-2 indent-7 hover:ring-4  ring-indigo-300"><textarea rows="5" cols="27"  placeholder="Small description on the course" ></textarea></div>
-        <div class="mt-4 indent-7">Price</div>
-        <div class="m-2 indent-5 ">
-            <select class="h-9 w-72 bg-white hover:ring-4 ring-indigo-300">
-                <option value="5000">Rs. 5000</option>
-            </select>
-        </div>
-        <div class="mt-4 text-center mr-24"><button class="mt-1.5 float-right border border-slate-950  w-7/12">Add Course</button></div>
-    </div>
+    <form onsubmit="addCourse(event)">
+        <div class="bg-slate-200 max-w-md  p-14   justify-center mt-32 mx-96 rounded-lg shadow-xl shadow-indigo-400  ml-[700px]">
+            <h1 class="text-2xl mt-2 text-center m-9">Add Course</h1>
+            <div class=" indent-7">Course Name</div>
+            <div class="indent-7 mt-2"><input type="text" placeholder="eg.Certified Blockchain Associate" class="h-9 w-10/12 hover:ring-4 ring-indigo-300" id="name"></div>
+            <div class="mt-4 indent-7">Course Id</div>
+            <div class="mt-2 indent-7"><input type="text" placeholder="eg.1" class="h-9 w-10/12 hover:ring-4 ring-indigo-300" id="Id"></div>
+            <div class="mt-4 indent-7">Course Type</div>
+            <div class="mt-2 indent-7 ">
+                <select class="h-9 w-10/12 hover:ring ring-indigo-300 bg-white" id="type">
+                    <option value="self-paced" class="">Self-Paced</option>
     
+                </select>
+                
+            </div>
+            <div class="mt-4 indent-7">Description</div>
+            <div class="mt-2 indent-7 hover:ring-4  ring-indigo-300"><textarea rows="5" cols="27"  placeholder="Small description on the course" id="description"></textarea></div>
+            <div class="mt-4 indent-7">Price</div>
+            <div class="m-2 indent-5 ">
+                <select class="h-9 w-72 bg-white hover:ring-4 ring-indigo-300" id="price">
+                    <option value="5000">Rs. 5000</option>
+                </select>
+            </div>
+            <div class="mt-4 text-center mr-24"><button class="mt-1.5 float-right border border-slate-950  w-7/12">Add Course</button></div>
+        </div>
+        
+    </form>
     
 </body>
 </html>

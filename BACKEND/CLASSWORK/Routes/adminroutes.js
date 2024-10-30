@@ -3,14 +3,30 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import {authenticate } from '../MiddleWare/auth.js';
 import dotenv from 'dotenv';
+import mongoose from "mongoose";
 
 dotenv.config()
 const adminroute =  Router();
-const user = new Map()
+// const user = new Map()
 const secretkey = process.env.Secretkey;
+//collection file decleration
+//Define User Schema
+const userSchema = new mongoose.Schema(
+    {
+    firstName:String,
+    lastName:String,
+    userName:{type:String,unique:true},
+    password:String,
+    role:String
+})
+//create Model
+const User = mongoose.model('Userdetails',userSchema);
+
+mongoose.connect('mongodb://localhost:27017/KBA-Courses')
 
 adminroute.get('/',(req,res)=>{       
 res.send("Hello World")
+
 
 })
 
@@ -18,27 +34,31 @@ res.send("Hello World")
 adminroute.post('/signup',async(req,res)=>{ 
     try{
 
-    const data = req.body;
+  
     const { FirstName,
         LastName,
         UserName,
         Password,
-        Role} = data;
-       
-        if(user.has(UserName)){
+        Role} = req.body;
+        const newPassword =await bcrypt.hash(Password,10)
+        console.log(newPassword);
+
+        const existingUser = await User.findOne({userName : UserName})
+        if(existingUser){
            res.status(400).json({message: "already Exist"})
         }   
         else{
-        const newP = await bcrypt.hash(Password,10); 
-      
+        const newUser = new User({
+            firstName:FirstName,
+            lastName:LastName,
+            userName:UserName,
+            password:newPassword,
+            role:Role
 
-        user.set(UserName,{
-            FirstName,LastName,Password:newP,Role
-        });
-       
-        
-        console.log(user.get(UserName));
-        res.status(201).json({message : "Data saved!"});
+        }); 
+
+        await newUser.save();
+        res.status(201).json({message : "User registered successfully!"});
         }    
     }
     catch(error){
@@ -50,17 +70,20 @@ adminroute.post('/signup',async(req,res)=>{
 adminroute.post('/login',async(req,res)=>{
     try{
     const {UserName,Password} = req.body;
-    const result = user.get(UserName)
+    const result = await User.findOne({userName:UserName})
+    console.log(result);
    
     if(!result){
         res.status(400).json({message:"User not found"})
 
     }
     else{
-        const valid = await bcrypt.compare(Password,result.Password)
+        console.log(Password)
+        console.log(result.password);
+        const valid = await bcrypt.compare(Password,result.password)
         console.log(valid);
         if(valid){
-           const token = jwt.sign({UserName : UserName, Role : result.Role},secretkey,{expiresIn : '1h'})
+           const token = jwt.sign({UserName : UserName, Role : result.role},secretkey,{expiresIn : '1h'})
            res.cookie('try',token,{ httpOnly : true  });
              console.log("login");
              res.status(201).json({token})
@@ -75,10 +98,10 @@ catch(error)
 }
 });
 
-const add = new Map()
+// const add = new Map()
 
 adminroute.post('/addcourse', authenticate ,(req,res)=>{
-    res.status(201).json({message: 'Hello'})
+    // res.status(201).json({message: 'Hello'})
     console.log(req.UserName);
     console.log(req.Role);
     
@@ -86,19 +109,20 @@ adminroute.post('/addcourse', authenticate ,(req,res)=>{
     if(req.Role == 'admin'){
         console.log('Admin login success!')
         try{
-            const addcourse = req.body
+            const data = req.body
             const {
                 CourseName,
                 CourseId,
                 CourseType,
                 Description,
-                Price } = addcourse
+                Price } = data
         
                 // console.log({CourseName,CourseId,CourseType,Description,Price});
                 if(add.has(CourseId)){
                     res.status(400).json({message: 'Already Exists!'})
                 }
                 else{
+                    res.status(201).json({message: 'Added successfully'})
                     add.set(CourseId,{CourseName,CourseType,Description,Price});
                     console.log(add.get(CourseId));
                 }
@@ -116,24 +140,40 @@ adminroute.post('/addcourse', authenticate ,(req,res)=>{
 
 
 //using params
-// adminroute.get('/getCourse/:Id',(req,res)=>{
-//     console.log(req.params.Id);
-//     let result = req.params.Id
-//     if(add.has(result)){
-//         console.log(add.get(result));
+adminroute.get('/getCourse/:Id',(req,res)=>{
+
+ console.log(req.params.Id);
+    let result = req.params.Id
+try {
+    
+    if(add.has(result)){
+        console.log(add.get(result));
+    res.status(200).json({message:"success"})
+    }else{
+        res.status(401).json("id not exist")
+        console.log("id not exist")
+    }
+
+} catch (error) {
+    res.status(500).json(error)
+}
+
+
+})
         
-//     }
-//  })
+    
+
  
  //using Query
- adminroute.get('/getcourse', (req,res)=>{
-    // console.log(req.query.CourseId);
-    let result = req.query.CourseId
-    if(add.has(result)){
-        console.log(add.get(result))
-    }
+//  adminroute.get('/getcourse/:id', (req,res)=>{
+//     // console.log(req.query.CourseId);
+// 
+//     let result = req.query.CourseName
+//     if(add.has(result)){
+//         console.log(add.get(result))
+//     }
     
- })
+//  })
  
 
 
@@ -175,21 +215,15 @@ adminroute.put('/update',authenticate ,(req,res)=>{
 
 });
 
-adminroute.get('/deleteCourse',(req,res)=>{
-    if(req.Role == 'admin'){
-        console.log('Admin login success!')
+adminroute.delete('/deleteCourse',authenticate,(req,res)=>{
+    
         
     let result = req.query.CourseId
     if(add.has(result)){
-        // console.log(add.get(result))
+        console.log(add.delete(result))
         add.delete(result)
-        console.log("The result is removed!");
+        console.log("The Course is removed!");
         }
-    else{
-        console.log("Error: no items foundes!");
-        
-    }
-    }
 
 
 });
@@ -197,20 +231,34 @@ adminroute.get('/deleteCourse',(req,res)=>{
 
 adminroute.get('/viewUser',authenticate,(req,res)=>{
     try{
-        const user = req.Role;
-        res.json({user});
-    }
+    const user=req.Role;
+    res.json({user});}
     catch{
-        res.status(404).json({message: 'user not authorized'})
+        res.status(404).json({message:'user not authorized'});
+    }
+})
+
+adminroute.get('/viewCourse', async(req,res)=>{
+    try{
+        console.log(add.size);
+
+        if(add.size!=0){
+           
+            
+        res.send(Array.from(add.entries()))
+    }
+else{
+    res.status(404).json({message:'Not Found'});
+}}
+    catch{
+        res.status(404).json({message:"Internal error"})
     }
 })
 
 
-
-adminroute.post('/logout',(req,res)=>{
-    res.clearCookie('authtoken');
-    res.send('logout successfully');
-    console.log('logout successfully');
+adminroute.get('/logout', (req, res) => {
+    res.clearCookie('authToken'); // 'authToken' is the cookie name
+    res.status(200).json({ message: 'Logout successful' });
 })
 
 

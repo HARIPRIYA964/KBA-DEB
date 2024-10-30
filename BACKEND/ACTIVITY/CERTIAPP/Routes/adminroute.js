@@ -93,6 +93,26 @@ adminroute.post('/issueCertificate',authenticate,(req,res)=>{
     }
 });
 
+
+adminroute.get('/getCertificate/:certificateId',(req,res)=>{
+    console.log(req.params.certificateId);
+    let result = req.params.certificateId
+    try{
+        if(certificate.has(result)){
+            console.log(certificate.get(result));
+            res.status(200).json({message: "success"})
+        }
+        else{
+            res.status(401).json("id not exist")
+            console.log("id not exist")
+        }
+    }
+    catch(error){
+        res.status(500).json(error)
+    }
+})
+
+
 adminroute.post('/logout',(req,res)=>{
     res.clearCookie('authtoken');
     res.send('logout successfully');

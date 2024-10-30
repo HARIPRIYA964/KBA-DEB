@@ -14,7 +14,7 @@
         console.log("hi");
         try{
         
-       const response=await fetch("http://127.0.0.1:8000/viewUser",{
+       const response=await fetch("http://127.0.0.1:3000/viewUser",{
         method:'GET',
        credentials: 'include', 
         });
@@ -33,7 +33,7 @@
 
     }
     async function viewCourse(){
-        const response=await fetch("http://127.0.0.1:8000/viewCourse",{
+        const response=await fetch("http://127.0.0.1:3000/viewCourse",{
         method:'GET',
        credentials: 'include', 
         });
@@ -61,7 +61,10 @@
                const description=document.createElement("p");
                description.innerHTML=course[1].Description;
                const more=document.createElement("input");
-               more.onclick=handleMore;
+               more.onclick= function(){
+                handleMore(course[0])
+               }
+
                more.type='submit';
                more.value='View More'
                more.style.border='2px solid black';
@@ -82,13 +85,13 @@
         window.location.href='/notfound.html';
     }
 }
-function handleMore(){
-        const more=document.getElementById("name").value;
-        console.log(more);
-        localStorage.setItem('course',more);
-        window.location.href='/viewCourse.html'
-        
-    }
+ function handleMore(value1) {
+            console.log(value1);
+
+            localStorage.setItem('course', value1);
+            window.location.href = './viewCourse.html'
+
+        }
 </script>
 <body>
   <!-- navbar  -->
@@ -105,7 +108,7 @@ function handleMore(){
            <a href="#" class='ml-20'>Courses</a>
            <a href="#" class='ml-20'>Contact Us</a>
            
-           <a href="/add-course.html" id="admin" class='ml-20' style="display: none;">Add Course</a>
+           <a href="./AddCourse.html" id="admin" class='ml-20' style="display: none;">Add Course</a>
            <a class='ml-20' href="#" onclick="logout()">Logout</a>
        </div>
    </div>

@@ -1,10 +1,12 @@
 import express,{json} from 'express'; //express file is  importing 
 import { adminroute } from './Routes/adminroutes.js';
+import dotenv from 'dotenv';
 import cors from 'cors'
 import cookieParser from 'cookie-parser';
 
 const port = process.env.Port;
 
+dotenv.config();
 const app = express();
 app.use(cors({
     origin:'http://127.0.0.1:5500',      // or // 'http://127.0.0.1:5000'
