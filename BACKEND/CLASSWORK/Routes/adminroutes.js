@@ -22,6 +22,18 @@ const userSchema = new mongoose.Schema(
 //create Model
 const User = mongoose.model('Userdetails',userSchema);
 
+//create course schema
+const CourseSchema = new mongoose.Schema({
+    courseName : String,
+    courseId : {type : String,unique:true},
+    courseType : String,
+    description : String,
+    price :String
+
+})
+//create course model
+const Course = mongoose.model('courses',CourseSchema)
+
 mongoose.connect('mongodb://localhost:27017/KBA-Courses')
 
 adminroute.get('/',(req,res)=>{       
@@ -100,7 +112,7 @@ catch(error)
 
 // const add = new Map()
 
-adminroute.post('/addcourse', authenticate ,(req,res)=>{
+adminroute.post('/addcourse', authenticate ,async(req,res)=>{
     // res.status(201).json({message: 'Hello'})
     console.log(req.UserName);
     console.log(req.Role);
@@ -108,57 +120,57 @@ adminroute.post('/addcourse', authenticate ,(req,res)=>{
     
     if(req.Role == 'admin'){
         console.log('Admin login success!')
+        const {
+            CourseName,
+            CourseId,
+            CourseType,
+            Description,
+            Price
+        } = req.body
+        console.log(req.body)
         try{
-            const data = req.body
-            const {
-                CourseName,
-                CourseId,
-                CourseType,
-                Description,
-                Price } = data
-        
-                // console.log({CourseName,CourseId,CourseType,Description,Price});
-                if(add.has(CourseId)){
-                    res.status(400).json({message: 'Already Exists!'})
-                }
-                else{
-                    res.status(201).json({message: 'Added successfully'})
-                    add.set(CourseId,{CourseName,CourseType,Description,Price});
-                    console.log(add.get(CourseId));
-                }
-        
-         
+            const existingCourse = await Course.findOne({courseId : CourseId })
+            
+            if(existingCourse){
+                res.status(400).json({message: 'Course Already present!'})
             }
-            catch(error){
-                res.status(500).json(error);
+            else{
+                const newCourse= new Course({
+                    courseName : CourseName,
+                    courseId : CourseId,
+                    courseType : CourseType,
+                    description : Description,
+                    price :parseInt(Price)
+                });
+                await newCourse.save()
             }
         }
-        else{
-            console.log('Invalid credentials!')
-        }    
+        catch(error){
+            res.status(500).json(error);
+        }
+    }
+    else{
+        console.log('You dont have permission')
+    }    
 });
 
 
 //using params
-adminroute.get('/getCourse/:Id',(req,res)=>{
-
- console.log(req.params.Id);
-    let result = req.params.Id
-try {
-    
-    if(add.has(result)){
-        console.log(add.get(result));
-    res.status(200).json({message:"success"})
-    }else{
-        res.status(401).json("id not exist")
-        console.log("id not exist")
+adminroute.get('/getCourse/:Id',async(req,res)=>{
+    try {
+        //
+        const search = req.params.Id;
+        const result = await Course.findOne({courseId:search});
+        if(result){
+            res.status(200).json({message:result})
+        }else{
+            res.status(401).json("id not exist")
+            console.log("id not exist")
+        }
     }
-
-} catch (error) {
-    res.status(500).json(error)
-}
-
-
+    catch (error) {
+        res.status(500).json(error)
+    }
 })
         
     
@@ -177,9 +189,8 @@ try {
  
 
 
-adminroute.put('/update',authenticate ,(req,res)=>{
-    if(req.Role == 'admin'){
-        console.log('Admin login success!')
+adminroute.put('/update',authenticate ,async(req,res)=>{
+    
         try{
            
             const {
@@ -188,40 +199,46 @@ adminroute.put('/update',authenticate ,(req,res)=>{
                 newCourseType,
                 newDescription,
                 newPrice} = req.body
+                const existingCourse = await Course.findOne({courseId : CourseId})
 
                 // console.log(CourseId,{newCourseName,newCourseType,newDescription,newPrice})
-                if(add.has(CourseId)){
-                    const update = add.get(CourseId);
-                    update.CourseName = newCourseName || update.CourseName;
-                    update.CourseType = newCourseType || update.CourseType;
-                    update.Description = newDescription || update.Description;
-                    update.Price = newPrice || update.Price;
-                    add.set(CourseId,update);
-                    console.log(add.get(CourseId));
-                    res.status(200).json({message: "Course Update successfully"})
+                if(!existingCourse){
+                    return res.status(404).json({message: "admin update course",existingCourse})
+                }
+                if(req.Role === 'admin'){
+                    console.log('Admin login success!')
+                    
+                    existingCourse.courseName = newCourseName || existingCourse.courseName;
+                    existingCourse.courseType = newCourseType || existingCourse.courseType;
+                    existingCourse.description = newDescription || existingCourse.description;
+                    existingCourse.price = newPrice || existingCourse.price;
+                
+
+                    await existingCourse.save()
+                
+                    res.status(200).json({message: "Course Update successfully",existingCourse});
 
                 }
+                else{
+                    console.log("invalid credential")
+                }
+                
               
 
         }
         catch(error){
             res.status(500).json(error);
-        }
-    }
-    else{
-        console.log("invalid credential")
-    }
-    
+        }    
 
 });
 
-adminroute.delete('/deleteCourse',authenticate,(req,res)=>{
+adminroute.delete('/deleteCourse',authenticate,async(req,res)=>{
     
         
-    let result = req.query.CourseId
-    if(add.has(result)){
-        console.log(add.delete(result))
-        add.delete(result)
+    const result = req.query.Id
+    const del = await Course.deleteOne({courseId : result})
+    if(result){
+        res.status(200).json({message: "The Course is removed!"})
         console.log("The Course is removed!");
         }
 
@@ -240,12 +257,13 @@ adminroute.get('/viewUser',authenticate,(req,res)=>{
 
 adminroute.get('/viewCourse', async(req,res)=>{
     try{
-        console.log(add.size);
+        const courses = await Course.find()
+       
 
-        if(add.size!=0){
+        if(courses){
            
             
-        res.send(Array.from(add.entries()))
+        res.send(Array.from(Course.entries()))
     }
 else{
     res.status(404).json({message:'Not Found'});

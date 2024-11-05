@@ -1,6 +1,9 @@
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 
-const secretkey ="hii"
+dotenv.config()
+
+const Secretkey =process.env.Secretkey;
 const authenticate = (req,res,next)=>{
     const cookies = req.headers.cookie;
     console.log(cookies);
@@ -8,7 +11,7 @@ const authenticate = (req,res,next)=>{
     for(let cooki of cookie){
         const [name,token] = cooki.trim().split('=');
         if(name == 'authToken'){
-            const verified = jwt.verify(token,secretkey)
+            const verified = jwt.verify(token,Secretkey)
             console.log(verified);
             console.log(verified.UserName);
             req.UserName = verified.UserName;

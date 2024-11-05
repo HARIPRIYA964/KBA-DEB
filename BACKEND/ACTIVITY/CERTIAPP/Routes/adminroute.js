@@ -2,32 +2,60 @@ import { Router } from "express";
 import bcrypt  from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { authenticate } from "../MiddleWare/auth.js";
+import dotenv from 'dotenv';
+import mongoose from "mongoose";
 
+dotenv.config()
 const adminroute = Router();
-const user = new Map();
-const secretkey = 'hii';
+// const user = new Map();
+const Secretkey = process.env.Secretkey;
 
- 
+const userSchema = new mongoose.Schema({
+    firstName:String,
+    lastName:String,
+    userName:{type:String,unique:true}
+}) 
+const User = mongoose.model('Userdetails',userSchema);
+const CourseSchema = new mongoose.Schema({
+    courseName : String,
+    courseId : {type : String,unique:true},
+    courseType : String,
+    description : String,
+    price :String
+
+})
  
 adminroute.post('/signup',async(req,res)=>{
     try{
-        const data = req.body;
+        
         const {
             FirstName,
             LastName,
             UserName,
             Password,
-            Role} = data
+            Role} = req.body
+            const newPassword =await bcrypt.hash(Password,10)
 
-            if (user.has(UserName)){
+            const existingUser = await User.findOne({userName : UserName})
+
+            if (existingUser){
                 res.status(400).json({message : "already exists"})
             }
             else{
-                const newP = await bcrypt.hash(Password,10)
-                user.set(UserName,{FirstName,LastName,Password:newP,Role});
-            }
-            console.log(user.get(UserName));
-            res.status(201).json({message: "Data Saved!"})
+                const newUser = new User({
+                    firstName:FirstName,
+                    lastName:LastName,
+                    userName:UserName,
+                    password:newPassword,
+                    role:Role
+        
+                }); 
+            
+        await newUser.save();
+        res.status(201).json({message : "User registered successfully!"});
+        }    
+            
+  
     }
     catch(error){
         res.status(500).json(error);
@@ -48,7 +76,7 @@ adminroute.post('/login', async(req,res)=>{
         const valid =await bcrypt.compare(Password,result.Password)
         console.log(valid);
         if(valid){
-            const token = jwt.sign({UserName : UserName, Role: result.Role}, secretkey, {expiresIn : '1h'})
+            const token = jwt.sign({UserName : UserName, Role: result.Role}, Secretkey, {expiresIn : '1h'})
             res.cookie('authToken', token,{
                 httpOnly : true
             });
@@ -61,20 +89,20 @@ adminroute.post('/login', async(req,res)=>{
         }
     }
 });
-const certificate = new Map()
+// const certificate = new Map()
 adminroute.post('/issueCertificate',authenticate,(req,res)=>{
     if(req.Role == 'Admin'){
         console.log('Admin login Successfully!')
 
         try{
-            const course = req.body
+            
            const {
                 selectCourse,
                 certificateId,
                 candidateName,
                 selectGrade,
                 issueDate
-             } = course
+             } = req.body
              if(certificate.has(certificateId)){
                 res.status(400).json({message: "Already Exists!"})
              }

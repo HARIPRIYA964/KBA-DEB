@@ -24,7 +24,7 @@
         localStorage.setItem(Id, JSON.stringify(courseData));
 
         try {
-            const response = await fetch("http://127.0.0.1:3000/AddCourse",{
+            const response = await fetch("http://127.0.0.1:3000/addcourse",{
             method : 'POST',
             credentials : 'include',
             headers: {
@@ -39,24 +39,13 @@
             })
         })
         console.log(response.status)
-        if (response.status == 201){
-            window.location.href = "./home.html"
-            alert('Course Added successfully');
-            // // localStorage
-            // let courses=JSON.parse(localStorage.getItem('courses'))||[];
-            // const newCourse= {
-            //     CourseName : Name,
-            //     CourseId : Id,
-            //     CourseType :Type,
-            //     Description : Description,
-            //     Price : Price
-            // }
-            // courses.push(newCourse)
-            // localStorage.setItem('courses',JSON.stringify(courses))
-            // console.log("Course Added successfully")
+        if (response.status == 400){
+            alert("Course Already Exist!")
         }
-        else if(response.status == 400){
-            alert('course already exist')
+        else if(response.status == 201){
+            alert('coursen Added successfully')
+            window.location.href = './home.html'
+
         }
 
         else{
