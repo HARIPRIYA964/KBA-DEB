@@ -33,11 +33,12 @@
 
     }
     async function viewCourse(){
-        const response=await fetch("http://127.0.0.1:3000/viewCourse",{
+         try {
+            const response=await fetch("http://127.0.0.1:3000/viewCourse",{
         method:'GET',
        credentials: 'include', 
         });
-        console.log(response.status);
+        console.log(response);
         
          const data1=await response.json();
          console.log(data1.length);
@@ -54,15 +55,20 @@
 
                const coursename=document.createElement("h1");
                coursename.id='name';
-               coursename.value=course[0]
-               coursename.innerHTML=course[0];
+                coursename.innerHTML= course[1].courseName
+
+               coursename.value=course[1].courseId
+               coursename.innerHTML=course[1].courseId
+
                const image=document.createElement("img");
                image.src="./download.png";
+
                const description=document.createElement("p");
-               description.innerHTML=course[1].Description;
+               description.innerHTML=course[1].description;
+
                const more=document.createElement("input");
                more.onclick= function(){
-                handleMore(course[0])
+                handleMore(course[1].courseId)
                }
 
                more.type='submit';
@@ -84,7 +90,14 @@
     else{
         window.location.href='/notfound.html';
     }
-}
+
+            
+         } catch (error) {
+            console.log(error);
+            
+            
+         }
+        }
  function handleMore(value1) {
             console.log(value1);
 

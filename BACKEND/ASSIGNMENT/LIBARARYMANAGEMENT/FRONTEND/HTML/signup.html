@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="/CSS/KBACOURSES/STYLE/Library Management/CSS/style.css"> -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Sign Up</title>
+
+    <script>
+        async function handleSubmit(event){
+             event.preventDefault()
+             const fname =   document.getElementById('name').value;
+             const email = document.getElementById('email').value;
+             const password = document.getElementById('Password').value;
+             const role = document.getElementById('Role').value;
+             console.log(fname,email,password,role)
+ 
+             const response = await fetch("http://127.0.0.1:8000/signup",{
+                 method: 'POST',
+                 headers : {
+                     'Content-Type':'application/json'
+                 },
+                 body : JSON.stringify(
+                 {
+                     FirstName : fname,
+                     Email : email,
+                     Password : password,
+                     Role : role
+                 })
+             });
+             console.log(response.status);
+             if (response.status == 201){
+                 alert("Successfully registered")
+                 window.location.href ="./signin.html"
+             }
+             else if (response.status == 400){
+                 alert('Email already used');
+             }
+             else{
+                 alert('Server Error .. Try after Sometime');
+             }
+             const data = await response.json();
+             console.log(data)
+ 
+         }
+     </script>
+
+
+</head>
+<body>
+  
+    <form action="" id="signupForm" onsubmit="handleSubmit(event)">
+    <div class="bg-slate-300 h-[100vh] flex justify-center py-7">
+        <div class="bg-teal-700 w-[50vh] h-[60vh] rounded-lg shadow-2xl shadow-green-950 mt-28">
+            <div class="p-5  font-serif  ">
+                <div class="text-3xl text-center pt-2 text-emerald-100"><span>Sign Up</span></div>
+             
+                <div class="pt-6 text-emerald-100 pl-16 " >
+                    <span> Name</span>
+                </div>
+                <div class="pt-2 pl-16  w-[10vh] ">
+                    <input type="text"  class="w-[30vh] h-[3vh]" id="name" required>
+                </div>
+                <div class="pt-4 text-emerald-100 pl-16">
+                    <span>Email</span>
+                </div>
+                <div class="pt-2 text-black pl-16">
+                    <input type="mail"  class="w-[30vh] h-[3vh]" id="email" required>
+                </div>
+                <div class="pt-4 text-emerald-100 pl-16">
+                    <span>Password</span>
+                </div>
+                <div class="pt-2 text-black pl-16">
+                    <input type="password"  class="w-[30vh] h-[3vh]" id="Password" required>
+                </div>
+                <div class="text-emerald-100 pt-4 pl-16">
+                    <span>Role</span>
+                </div>
+                <div class="pt-2 pl-16">
+                    <select class="w-[30vh] h-[3vh] bg-white" id="Role" required>
+                        <option value="select">Select</option>
+                        <option value="select">Admin</option>
+                        <option value="select">User</option>
+                    </select>
+                </div>
+                <div class="text-emerald-100 flex justify-center  bg-emerald-950  w-[15vh] h-[4vh] mt-4 ml-32">
+                   <button type="submit">Signup</button>
+                </div>
+                <div class="ml-14">______________________________________</div>
+                <div class="font-serif text-emerald-950 ml-28 ">Already have an account? <a href="./signin.html">Sign In</a></div>
+            </div>
+       
+        </div>
+     </div>
+    </form>
+</body>
+</html>

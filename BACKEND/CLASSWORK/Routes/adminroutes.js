@@ -143,6 +143,7 @@ adminroute.post('/addcourse', authenticate ,async(req,res)=>{
                     price :parseInt(Price)
                 });
                 await newCourse.save()
+                return res.status(200).json({message:"Coures addedd successfullly"})
             }
         }
         catch(error){
@@ -156,10 +157,10 @@ adminroute.post('/addcourse', authenticate ,async(req,res)=>{
 
 
 //using params
-adminroute.get('/getCourse/:Id',async(req,res)=>{
+adminroute.get('/getcourse',async(req,res)=>{
     try {
         //
-        const search = req.params.Id;
+        const search = req.query.Id;
         const result = await Course.findOne({courseId:search});
         if(result){
             res.status(200).json({message:result})
@@ -257,13 +258,11 @@ adminroute.get('/viewUser',authenticate,(req,res)=>{
 
 adminroute.get('/viewCourse', async(req,res)=>{
     try{
-        const courses = await Course.find()
-       
+        const viewallcourse = await Course.find()       
 
-        if(courses){
-           
+        if(viewallcourse){         
             
-        res.send(Array.from(Course.entries()))
+        res.send(Array.from(viewallcourse.entries()))
     }
 else{
     res.status(404).json({message:'Not Found'});

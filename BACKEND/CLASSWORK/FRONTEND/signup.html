@@ -8,12 +8,12 @@
     <script>
        async function handleSubmit(event){
             event.preventDefault()
-            const FirstName =   document.getElementById('FirstName').value;
-            const LastName = document.getElementById('LastName').value;
-            const UserName =  document.getElementById('UserName').value;
+            const Fname =   document.getElementById('FirstName').value;
+            const Lname = document.getElementById('LastName').value;
+            const Username =  document.getElementById('UserName').value;
             const Password = document.getElementById('Password').value;
             const Role = document.getElementById('Role').value;
-            console.log(FirstName,LastName,UserName,Password,Role)
+            console.log(Fname,Lname,Username,Password,Role)
 
             const response = await fetch("http://127.0.0.1:3000/signup",{
                 method: 'POST',
@@ -22,9 +22,9 @@
                 },
                 body : JSON.stringify(
                 {
-                    FirstName : FirstName,
-                    LastName : LastName ,
-                    UserName : UserName,
+                    FirstName : Fname,
+                    LastName : Lname ,
+                    UserName : Username,
                     Password : Password,
                     Role : Role
                 })
@@ -95,7 +95,7 @@
             
                     <input class="button1" type="submit" value="Sign Up">
                     <br>
-                    <p>Already have an account? <a href="loginpage.html">Login</a></p>
+                    <p>Already have an account? <a href="login.html">Login</a></p>
                 </div>
             </form>
            </div>

@@ -7,108 +7,51 @@
     <link rel="icon" type="image/png" href="/favicon.ico" />
     <title>Blockchain Courses</title>
     <script>
+      window.onload=async()=>{
+       
+       let courses=localStorage.getItem("course")
+       console.log(courses);
+       
+      const response= await fetch(`http://127.0.0.1:3000/getcourse?Id=${courses}`,{
+           method:"GET",
+           credentials:"include",
+       });
 
-let name;
-        window.onload=async()=>{
-            console.log("hi");
-            try{
-            
-           const response1=await fetch("http://127.0.0.1:3000/viewUser",{
-            method:'GET',
-           credentials: 'include', 
-            });
+       console.log(response);
+
+       let data=await response.json()
+       console.log(data)
+      document.getElementById("Cname").textContent=data.CourseName
+       document.getElementById("Ctype").textContent=data.CourseType
+       document.getElementById("Cprice").textContent=data.Price
+       document.getElementById("des").textContent=data.Description
+   }
+     
+//delete course
+       async function deletecourse(event){
+               event.preventDefault()
+               let courses=localStorage.getItem("course");
            
-           
-           const data1 =await response1.json();
-           
-           if(data1.user=='admin'){
-            
-            document.getElementById("admin").style.display='block';
+                   const response= await fetch("http://127.0.0.1:3000/deletecourse?Courseid=${courses}",{
+                   method:"DELETE",
+                   credentials:"include",
+               })  
 
-            name=localStorage.getItem('add');
-            console.log(name);
-            const response=await fetch(`http://127.0.0.1:3000/getCourse=${name}`);
-            console.log(response);
-            const data=await response.json();
-            if(data){
-            console.log(data);
-            document.getElementById("name").innerHTML=name;
-            document.getElementById("price").innerHTML=data.Price;
-            document.getElementById("description").innerHTML=data.Description;
-            }
-            else{
-                window.location.href='/notfound.html';
-            }
-            
-           }
-           
-          }
-           catch(error){
-            console.log(error);}
-            
-            
-        }
+               console.log(response);
+               const data= await response.json()
+               console.log(data);
+               if (response.status === 200) {
+                   alert("Course has been deleted");
+                   window.location.href='./home.html'
+               } else if (response.status === 404) {
+                   alert(data.message);
+               } else {
+                   alert('Failed to delete course');
+               }
+               }
 
-// window.onload=async()=>{
-//         const Courseid=localStorage.getItem('add');
-//               console.log(Courseid);
-
-//             const storedCourse = localStorage.getItem(Courseid);
-//             const courseData = storedCourse ? JSON.parse(storedCourse) : null;
-
-//             if(courseData){
-//                 console.log(courseData);
-//                 document.getElementById("Cname").textContent = courseData.CourseName;
-//                 document.getElementById("Ctype").textContent = courseData.CourseType;
-//                 document.getElementById("Cdes").textContent = courseData.Description;
-//                 document.getElementById("Cprice").textContent = courseData.Price;
-//             }
-//             else{
-//                 window.location.href='/notfound.html';
-//             }
-
-//             }
-
-  
-
-      // window.onload=async()=>{
-        
-      //       try{
-      //          const response=await fetch("http://127.0.0.1:3000/viewUser",{
-      //          method:'GET',
-      //          credentials: 'include', 
-      //       });
-      //       const data1=await response.json();
-
-      //       if(data1.user=='admin'){
-            
-      //       document.getElementById("admin").style.display='block';
-            
-      //      }
-      //    }
-      //    catch(error){
-      //       console.log(error);}
-            
-      //       const name=localStorage.getItem('add');
-      //       console.log(name);
-      //       const response=await fetch(`http://127.0.0.1:3000/getCourse?courseId=${name}`);
-      //       const data1=await response.json();
-          
-           
-      //       if(data1){
-      //       console.log(data1);
-      //       document.getElementById("cname").value=name;
-      //       document.getElementById("type").value=data1.CourseType;
-      //       document.getElementById("price").value=data1.Price;
-      //       document.getElementById("description").innerHTML=data1.Description;
-
-      //       }
-      //       else{
-      //           window.location.href='/notfound.html';
-      //       }
-      // }
+   </script> 
       
-    </script>
   </head>
 <body>
 
