@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="/CSS/KBACOURSES/STYLE/Library Management/CSS/style.css"> -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Update Book</title>
+    <script>
+        window.onload =async()=>{
+                
+                let bookid=localStorage.getItem("book")
+                console.log(bookid);
+                
+            const response= await fetch(`http://127.0.0.1:8003/getbook?bookId=${bookid}`,{
+                    method:"GET",
+                    credentials:"include",
+                });
+
+                console.log(response);
+                let data=await response.json()
+                console.log(data);     
+            
+                
+                console.log(data.message.bookId);
+        
+              
+          document.getElementById("newbookname").value= data.message.bookName
+          document.getElementById("bookid").value=data.message.bookId
+          document.getElementById("newbooktype").value=data.message.bookType
+          document.getElementById("newdescription").value=data.message.description
+          document.getElementById("newprice").value=data.message.price
+          
+    }
+
+        
+        async function updateBook(event){
+            event.preventDefault()
+
+            const Bid = document.getElementById('bookid').value;
+            const Newbookname = document.getElementById('newbookname').value
+            const Newbooktype = document.getElementById('newbooktype').value;
+            const Newdescription = document.getElementById('newdescription').value;
+            const Newprice = document.getElementById('newprice').value;
+           
+
+
+            console.log("Updated Values:",Bid,Newbookname,Newbooktype,Newprice,Newdescription);
+            console.log("Sending BookId:",Bid); // Log before sending the request
+
+  
+
+            const response = await fetch(`http://127.0.0.1:8003/update`,{
+                method: 'PUT',
+                credentials:'include',
+                headers:{"Content-Type":"application/json" },
+                body: JSON.stringify({
+                    newBookName: Newbookname,
+                    Bookid:Bid,
+                    newBooktype: Newbooktype,
+                    newDescription: Newdescription,
+                    newPrice:Newprice
+                })
+            })
+
+            console.log(response);
+            const data = await response.json();
+            console.log(data);
+
+            if (response.status == 200) {
+           
+           alert("Book updated Successfully");
+           window.location.href = './learnmore.html';
+           } else{
+           alert("Book not found");
+           console.log(error);
+           
+           }
+            
+            
+        }       
+</script>
+
+
+
+</head>
+<body>
+    <div class="bg-emerald-950 text-white flex justify-end space-x-3 py-6 pr-4 font-serif ">
+        <a href="/index.html">HOME</a>
+        <a href="/addbook.html">ADD BOOK</a>
+        <a href="./viewbook.html">VIEW BOOK</a>
+        <a href="signup.html" onclick="logout()">LOG OUT</a>
+
+    </div>
+    <form action="" onsubmit="updateBook(event)">
+    <div class="bg-slate-300 h-[96vh] flex justify-center py-7">
+        <div class="bg-teal-700 w-[57vh] h-[75vh] rounded-lg shadow-2xl shadow-green-950 ">
+            <div class="p-5  font-serif  ">
+                <div class="text-3xl text-center pt-2 text-emerald-100">
+                    <span>Update Book</span>
+                </div>
+                <div class="pt-6 text-emerald-100 pl-16 " >
+                    <span>Book Name</span>
+                </div>
+                <div class="pt-2 pl-16  w-[10vh] ">
+                    <input type="text"  class="w-[37vh] h-[4vh]" id="newbookname" required>
+                </div>
+                <div class="pt-4 text-emerald-100 pl-16">
+                    <span>Book Id</span>
+                </div>
+                <div class="pt-2 text-black pl-16">
+                    <input type="text"  class="w-[37vh] h-[4vh]" id="bookid" required>
+                </div>
+                <div class="pt-4 text-emerald-100 pl-16">
+                    <span>Book Type</span>
+                </div>
+                <div class="pt-2 text-black pl-16">
+                    <select class="w-[37vh] h-[4vh] bg-white" id="newbooktype">
+                        <option value="Select" >Select</option>
+                        <option value="Book1">Book1</option>
+                        <option value="Book2">Book2</option>
+                    </select>
+                 </div>
+                 <div class="text-emerald-100 pl-16 pt-4">
+                    <span>Description</span>
+                </div>
+                 <div class="pt-2 pl-16">
+                    <Textarea    rows="3px" cols="34px" id="newdescription" required></Textarea>
+                </div>
+                 <div class="text-emerald-100 pt-4 pl-16">
+                    <span>Price</span>
+                </div>
+                 <div class="pt-2 pl-16">
+                    <select class="w-[37vh] h-[4vh] bg-white" id="newprice" required>
+                        <option value="Select">Select</option>
+                        <option value="15000/-">15000/-</option>
+                        <option value="10000/-">10000/-</option>
+                    </select>
+                </div>
+                <div class="text-emerald-100 flex justify-center  bg-emerald-950  w-[20vh] h-[5vh] mt-4 ml-36">
+                    <button type="submit" >  Update Book  </button>  
+                </div>
+            </div>
+        </div>
+     </div>
+    </form>
+</body>
+</html>

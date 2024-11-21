@@ -6,29 +6,132 @@
     <!-- <link rel="stylesheet" href="/CSS/KBACOURSES/STYLE/Library Management/CSS/style.css"> -->
     <script src="https://cdn.tailwindcss.com"></script>
     <title>View book</title>
+    <script>
+        async function viewBook(){
+         try {
+                 const response=await fetch("http://127.0.0.1:8003/viewallbook",{
+                 method:'GET',
+                credentials: 'include'
+                 });
+                 console.log(response);
+                 
+                  const data1=await response.json();
+                  
+                  console.log(data1.length);
+                  
+                 if(response.status!=404){
+                     console.log(data1,"data");
+                     const container=document.getElementById("cards")
+                     container.innerHTML='';
+                     data1.forEach(book => {
+                         // console.log(book);
+                         const bookdiv=document.createElement("div");
+                         bookdiv.className = "content-center w-[290px] h-[350px] bg-slate-300 mt-6 mr-2 rounded-2xl shadow-2xl shadow-gray-950";
+     
+                        const bookname=document.createElement("h1");
+                        bookname.id='booktitle';
+                        bookname.className = "text-center mt-6 text-emerald-950 font-serif ";
+                        bookname.innerHTML = book[1].bookName;
+     
+                     //    bookname.value=book[1].bookId
+                     //    bookname.innerHTML=book[1].bookId;
+     
+                        const image=document.createElement("img");
+                        image.src="../IMAGE/img2.jpg";
+                        image.className = "w-[130px] h-auto ml-20 mt-10 ";   
+                        
+                    
+     
+                     const more = document.createElement("button");
+                     more.onclick = function() {
+                         handleMore(book[1].bookId);
+                         console.log( book[1].bookId);
+                         
+                     };            
+                       more.className = "text-center mt-3 text-emerald-950 font-serif border w-20 ml-[110px] border-slate-950 ";
+                       more.textContent = 'Learn More';
+     
+                                   
+     
+                       
+                         bookdiv.appendChild(image);
+                         bookdiv.appendChild(bookname);
+                         bookdiv.appendChild(more);         
+                        container.appendChild(bookdiv);
+     
+                    
+                      
+                    });
+             }  else{
+                 window.location.href='/notfound.html';
+                 alert("Failed to load Book. Please try again.");                        
+     
+             }   } catch (error) {
+                 console.error("Error:", error);
+                 alert("internal server error");                        
+     
+                         }    }
+     
+         function handleMore(value1){
+               
+                     // const more=document.getElementById("name").value;
+                 console.log(value1);
+                localStorage.setItem('book',value1);
+                 window.location.href='./learnmore.html'     
+             }
+       
+        
+             
+            
+          </script>
 </head>
-<body>
+<body class="bg-teal-700 ">
     <div class="bg-emerald-950 text-white flex justify-end space-x-3 py-6 pr-4 font-serif ">
-        <a href="../index.html">HOME</a>
-        <a href="../HTML/addbook.html">ADD BOOK</a>
-        <a href="../HTML/viewbook.html">VIEW BOOK</a>
-        <a href="../HTML/signin.html">SIGN IN</a>
-        <a href="../HTML/signup.html">SIGN UP</a>
+        <a href="./index.html">HOME</a>
+        <a href="./addbook.html">ADD BOOK</a>
+        <a href="./viewbook.html">VIEW BOOK</a>
+        <a href="#" onclick="logout()">LOG OUT</a>
          
     </div>
-    <div class="bg-teal-700 h-[96vh] flex  py-7">
-        <div class=" content-center w-[290px] h-[350px] bg-slate-300 mt-8 ml-16 rounded-2xl shadow-2xl shadow-gray-950" >
+    
+    <div class="h-auto">
+        <div  class=" flex  py-7">
+
+        <!-- <div class=" content-center w-[290px] h-[350px] bg-slate-300 mt-8 ml-2 rounded-2xl shadow-2xl shadow-gray-950" >
             <img src="../IMAGE/img2.jpg" alt="" class="w-[130px] h-auto ml-20 mt-10 ">
             <div class="text-center mt-6 text-emerald-950 font-serif " ><span>LORD OF THE RINGS</span></div>
             <div class="text-center mt-3 text-emerald-950 font-serif border w-20 ml-[100px] border-slate-950 " ><button>Learn more</button></div>
-        </div>
-        <div class=" content-center w-[290px] h-[350px] bg-slate-300 mt-8 ml-16 rounded-2xl shadow-2xl shadow-gray-950">
+        </div> -->
+        <!-- <div class=" content-center w-[290px] h-[350px] bg-slate-300 mt-8 ml-16 rounded-2xl shadow-2xl shadow-gray-950">
             <img src="../IMAGE/img3.jpeg" alt=""  class="w-[120px] h-auto ml-20 mt-10 ">
             <div class="text-center mt-6 text-emerald-950 font-serif "><span>BRAVE NEW WORLD</span></div>
             <div class="text-center mt-3 text-emerald-950 font-serif border w-20 ml-[100px] border-slate-950 "><button>Learn more</button></div>
+        </div> -->
+        <!-- <div class=" content-center w-[290px] h-[350px] bg-slate-300 mt-8 ml-16 rounded-2xl shadow-2xl shadow-gray-950" >
+            <img src="../IMAGE/img2.jpg" alt="" class="w-[130px] h-auto ml-20 mt-10 ">
+            <div class="text-center mt-6 text-emerald-950 font-serif " ><span>LORD OF THE RINGS</span></div>
+            <div class="text-center mt-3 text-emerald-950 font-serif border w-20 ml-[100px] border-slate-950 " ><button>Learn more</button></div>
+        </div> -->
+        <!-- <div class=" content-center w-[290px] h-[350px] bg-slate-300 mt-8 ml-16 rounded-2xl shadow-2xl shadow-gray-950">
+            <img src="../IMAGE/img3.jpeg" alt=""  class="w-[120px] h-auto ml-20 mt-10 ">
+            <div class="text-center mt-6 text-emerald-950 font-serif "><span>BRAVE NEW WORLD</span></div>
+            <div class="text-center mt-3 text-emerald-950 font-serif border w-20 ml-[100px] border-slate-950 "><button>Learn more</button></div>
+        </div> -->
+        <!-- <div class=" content-center w-[290px] h-[350px] bg-slate-300 mt-8 ml-16 rounded-2xl shadow-2xl shadow-gray-950" >
+            <img src="../IMAGE/img2.jpg" alt="" class="w-[130px] h-auto ml-20 mt-10 ">
+            <div class="text-center mt-6 text-emerald-950 font-serif " ><span>LORD OF THE RINGS</span></div>
+            <div class="text-center mt-3 text-emerald-950 font-serif border w-20 ml-[100px] border-slate-950 " ><button>Learn more</button></div>
+        </div> -->
         </div>
+        <div id="cards" class="   gap-12 ml-12 mt-10"></div>
+        <div class="text-center mt-16 text-emerald-950 font-serif border w-40 ml-[800px] border-slate-950  mb-10" >
+            <button onclick="viewBook()" >View All Books</button>
+        </div>
+
+       </div>
     
-        
-    </div>
+    
+   
+
 </body>
 </html>

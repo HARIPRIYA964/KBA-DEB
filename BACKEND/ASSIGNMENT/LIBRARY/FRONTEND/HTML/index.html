@@ -9,19 +9,45 @@
     <title>Home</title>
 </head>
 
+<script>
+    window.onload=async()=>{
+         console.log("hi");
+         try{
+         
+        const response=await fetch("http://127.0.0.1:8003/viewuser",{
+         method:'GET',
+        credentials: 'include', 
+         });          
+        
+        const data =await response.json();
+        
+        if(data.user=='Admin'){
+         
+         document.getElementById("admin").style.display='block';
+         
+        }}
+        catch(error){
+         console.log(error);}
+         
+ 
+     }
+ </script>
+
 <body>
     <div class="bg-emerald-950 text-white flex justify-end space-x-3 py-6 pr-4 font-serif ">
-        <a href="../HTML/index.html">HOME</a>
-        <a href="../HTML/addbook.html">ADD BOOK</a>
-        <a href="../HTML/viewbook.html">VIEW BOOK</a>
+        <a href="index.html">HOME</a>
+        <a href="addbook.html" id="admin" class='ml-20' style="display: none;">ADD BOOK</a>
+
+        <a href="viewbook.html">VIEW BOOK</a>
        
+        <a href="#" onclick="logout()">LOG OUT</a>
     </div>
 
     <div class="h-[30vh] w-screen bg-teal-700 py-16 pl-20 ">
         <span class="text-6xl text-white font-serif">LIBRARY</span>
     </div>
 
-    <div class=" bg-[url('.../IMAGE/img1.jpg)]  bg-cover bg-top  h-[59vh] w-screen" >
+    <div class=" bg-[url('../IMAGE/img1.jpg')]  bg-cover bg-top  h-[59vh] w-screen" >
       
     </div>
 

@@ -104,7 +104,7 @@ adminroute.post('/addbook',authenticate,async(req,res)=>{
                         bookId : BookId,
                         bookType : BookType,
                         description : Description,
-                        price : parseInt(Price)
+                        price : Price
                     });
                     await newBook.save()
                     return res.status(200).json({message: "Book added Successfully!"})
@@ -121,8 +121,8 @@ adminroute.post('/addbook',authenticate,async(req,res)=>{
 
 adminroute.get('/getbook',async(req,res)=>{
     try{
-        const search = req.query.Id;
-        const result = await Library.findOne({BookId:search});
+        const search = req.query.bookId;
+        const result = await Library.findOne({bookId:search});
         if(result){
             res.status(200).json({message: result})
         }
@@ -136,7 +136,7 @@ adminroute.get('/getbook',async(req,res)=>{
     }
 })
  
-adminroute.put('/updatebook',authenticate,async(req,res)=>{
+adminroute.put('/update',authenticate,async(req,res)=>{
     try{
         const{
             newBookName,
@@ -145,6 +145,8 @@ adminroute.put('/updatebook',authenticate,async(req,res)=>{
             newDescription,
             newPrice
         }=req.body
+        console.log("Received BookId:", BookId); // Log the BookId received in the request
+
         const existingBook = await Library.findOne({bookId:BookId})
         if(!existingBook){
             return res.status(404).json({message: "admin update book details",existingBook})
@@ -172,7 +174,9 @@ adminroute.put('/updatebook',authenticate,async(req,res)=>{
 
 adminroute.delete('/deletebook',authenticate,async(req,res)=>{
 
-    const result = req.query.BookId
+    const result = req.query.bookId
+    console.log(result);
+    
     const del = await Library.deleteOne({bookId:result})
     if(result){
         res.status(200).json({message: "The book is removed!"})
@@ -180,6 +184,32 @@ adminroute.delete('/deletebook',authenticate,async(req,res)=>{
     }
   
 })
+
+adminroute.get('/viewallbook', async(req,res)=>{
+    try{
+
+        const viewallbooks=await Library.find()
+
+        if(viewallbooks){
+            res.send(Array.from(viewallbooks.entries()))
+        }else{
+            res.status(404).json({message:'Not Found'});
+     }} catch{
+        res.status(404).json({message:"Internal error"})
+    }
+})
+
+
+
+adminroute.get('/viewuser',authenticate,(req,res)=>{
+    try{
+    const user=req.Role;
+    res.json({user});}
+    catch{
+        res.status(404).json({message:'user not authorized'});
+    }
+})
+
 
 adminroute.get('/logout', (req, res) => {
     res.clearCookie('Token'); // 'authToken' is the cookie name
