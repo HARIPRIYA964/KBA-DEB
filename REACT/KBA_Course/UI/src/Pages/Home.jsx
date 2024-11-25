@@ -8,6 +8,7 @@ const Home = () => {
   
   return (
    <>
+   
       <Hero />
       <TopCoureses />
       <CourseGrid isHome={true} />

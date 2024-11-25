@@ -1,11 +1,5 @@
 import React from 'react'
-import {
-  createBrowserRouter,
-  createRoutesFromElements,
-  RouterProvider,
-  Route,
-} from 'react-router-dom'
-
+import {createBrowserRouter,createRoutesFromElements,RouterProvider,Route,} from 'react-router-dom'
 import LoginPage from './Pages/LoginPage'
 import SignupPage from './Pages/SignupPage'
 import AuthLayout from './layouts/AuthLayout'

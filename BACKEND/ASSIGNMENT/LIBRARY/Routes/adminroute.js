@@ -10,148 +10,151 @@ const adminroute = Router()
 const secretkey = process.env.Secretkey
 
 const userSchema = new mongoose.Schema({
-    fname : String,
-    email : String,
-    username : {type:String,unique:true},
-    password : String,
-    role : String
+    fname: String,
+    email: String,
+    username: { type: String, unique: true },
+    password: String,
+    role: String
 
 })
-const User = mongoose.model("userdetails",userSchema)
+const User = mongoose.model("userdetails", userSchema)
 
 const librarySchema = new mongoose.Schema({
-    bookName:String,
-    bookId:{type:String,unique:true},
-    bookType:String,
-    description:String,
-    price:String
+    bookName: String,
+    bookId: { type: String, unique: true },
+    bookType: String,
+    description: String,
+    price: String
 })
-const Library = mongoose.model("Bookdetails",librarySchema)
+const Library = mongoose.model("Bookdetails", librarySchema)
 
 mongoose.connect("mongodb://localhost:27017/LIBRARY")
 
 
-adminroute.post('/signup',async(req,res)=>{
-    try{
-        const {Fname,Email,Username,Password,Role}=req.body;   
+adminroute.post('/signup', async (req, res) => {
+    try {
+        const { Fname, Email, Username, Password, Role } = req.body;
         if (!Username) {
             return res.status(400).json({ message: "Username is required" });
-          }
-          const existinguser=await User.findOne({username:Username})
-    if(existinguser){
-        res.status(400).json({message:"User Already exist"})
-    }else{
-        const newp=await bcrypt.hash(Password,10)
-        const newUser=new User({
-            fname:Fname,
-            email:Email,
-            username:Username,
-            password:newp,
-            role:Role
-        })
-        await newUser.save();
-        res.status(201).json({message:"account created successfully"})
-    }
+        }
+        const existinguser = await User.findOne({ username: Username })
+        if (existinguser) {
+            res.status(400).json({ message: "User Already exist" })
+        } else {
+            const newp = await bcrypt.hash(Password, 10)
+            const newUser = new User({
+                fname: Fname,
+                email: Email,
+                username: Username,
+                password: newp,
+                role: Role
+            })
+            await newUser.save();
+            res.status(201).json({ message: "account created successfully" })
+        }
     }
     catch (error) {
-        res.status(500).json(error) 
-        console.log(error)  
+        res.status(500).json(error)
+        console.log(error)
     }
 })
 
-adminroute.post('/login',async(req,res)=>{
+adminroute.post('/login', async (req, res) => {
     try {
-     const {Username,Password}=req.body
- const result=await User.findOne({username:Username})
-     console.log(result)
- 
-     if(!result){ 
-         res.status(404).json({message:"User not found"})
-     }else{
-         const valid =await bcrypt.compare(Password,result.password)
-         console.log(valid)
- 
-         if(valid){
-             const token =jwt.sign({Username:result.username,Role:result.role},secretkey,{expiresIn:"1 h"})
-             res.cookie('Token',token,{ httpOnly:true })
-             res.status(200).json({token})
-             console.log(token)
-         }
-     }
-    } catch (error) {
-     res.status(500).json({ message: 'Internal Server Error' });
- 
-     
-    }
- });
+        const { Username, Password } = req.body
+        const result = await User.findOne({ username: Username })
+        console.log(result)
 
-adminroute.post('/addbook',authenticate,async(req,res)=>{
-    if(req.Role == 'Admin'){
-        const{
+        if (!result) {
+            res.status(404).json({ message: "User not found" })
+        } else {
+            const valid = await bcrypt.compare(Password, result.password)
+            console.log(valid)
+
+            if (valid) {
+                const token = jwt.sign({ Username: result.username, Role: result.role }, secretkey, { expiresIn: "1h" })
+                res.cookie('Token', token, { httpOnly: true })
+                res.status(200).json({ token })
+                console.log({ token })
+            }
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'Internal Server Error' });
+
+
+    }
+});
+
+adminroute.post('/addbook', authenticate, async (req, res) => {
+    if (req.Role == 'Admin') {
+        const {
             BookName,
             BookId,
             BookType,
             Description,
             Price } = req.body
-            try{
-                const existingBook = await Library.findOne({bookId:BookId})
-                if(existingBook){
-                    res.status(400).json({message: 'Book Already present!'})
-                }
-                else{
-                    const newBook = new Library({
-                        bookName : BookName,
-                        bookId : BookId,
-                        bookType : BookType,
-                        description : Description,
-                        price : Price
-                    });
-                    await newBook.save()
-                    return res.status(200).json({message: "Book added Successfully!"})
-                }
+        try {
+            const existingBook = await Library.findOne({ bookId: BookId })
+            if (existingBook) {
+                res.status(400).json({ message: 'Book Already present!' })
             }
-            catch(error){
-                res.status(500).json(error);
+            else {
+                const newBook = new Library({
+                    bookName: BookName,
+                    bookId: BookId,
+                    bookType: BookType,
+                    description: Description,
+                    price: Price
+                });
+                await newBook.save()
+                return res.status(200).json({ message: "Book added Successfully!" })
             }
+        }
+        catch (error) {
+            res.status(500).json(error);
+        }
     }
-    else{
+    else {
         console.log('You dont have permission')
     }
 });
 
-adminroute.get('/getbook',async(req,res)=>{
-    try{
+adminroute.get('/getbook', async (req, res) => {
+    try {
         const search = req.query.bookId;
-        const result = await Library.findOne({bookId:search});
-        if(result){
-            res.status(200).json({message: result})
+        const result = await Library.findOne({ bookId: search });
+        if (result) {
+            res.status(200).json({ message: result })
         }
-        else{
+        else {
             res.status(401).json("id not exist")
             console.log("id not exist")
         }
     }
-    catch(error){
+    catch (error) {
         res.status(500).json(error)
     }
 })
- 
-adminroute.put('/update',authenticate,async(req,res)=>{
-    try{
-        const{
+
+adminroute.put('/update', authenticate, async (req, res) => {
+
+    const body = req.body
+
+    try {
+        const {
             newBookName,
             BookId,
             newBookType,
             newDescription,
             newPrice
-        }=req.body
+        } = body
         console.log("Received BookId:", BookId); // Log the BookId received in the request
 
-        const existingBook = await Library.findOne({bookId:BookId})
-        if(!existingBook){
-            return res.status(404).json({message: "admin update book details",existingBook})
+        const existingBook = await Library.findOne({ bookId: BookId })
+        if (!existingBook) {
+            return res.status(404).json({ message: "admin update book details", existingBook })
         }
-        if(req.Role === 'Admin'){
+        if (req.Role === 'Admin') {
             console.log('Admin login Successfully!')
 
             existingBook.bookName = newBookName || existingBook.bookName;
@@ -160,61 +163,63 @@ adminroute.put('/update',authenticate,async(req,res)=>{
             existingBook.price = newPrice || existingBook.price;
 
             await existingBook.save()
-            res.status(200).json({message: "Book Update successfully !",existingBook});
+            res.status(200).json({ message: "Book Update successfully !", existingBook });
         }
-        else{
+        else {
             console.log("inavlid credential")
         }
 
     }
-    catch(error){
-        
+    catch (error) {
+
     }
 })
 
-adminroute.delete('/deletebook',authenticate,async(req,res)=>{
+adminroute.delete('/deletebook', authenticate, async (req, res) => {
 
     const result = req.query.bookId
     console.log(result);
-    
-    const del = await Library.deleteOne({bookId:result})
-    if(result){
-        res.status(200).json({message: "The book is removed!"})
+
+    const del = await Library.deleteOne({ bookId: result })
+    if (result) {
+        res.status(200).json({ message: "The book is removed!" })
         console.log("The book is removed!")
     }
-  
+
 })
 
-adminroute.get('/viewallbook', async(req,res)=>{
-    try{
+adminroute.get('/viewallbook', async (req, res) => {
+    try {
 
-        const viewallbooks=await Library.find()
+        const viewallbooks = await Library.find()
 
-        if(viewallbooks){
+        if (viewallbooks) {
             res.send(Array.from(viewallbooks.entries()))
-        }else{
-            res.status(404).json({message:'Not Found'});
-     }} catch{
-        res.status(404).json({message:"Internal error"})
+        } else {
+            res.status(404).json({ message: 'Not Found' });
+        }
+    } catch {
+        res.status(404).json({ message: "Internal error" })
     }
 })
 
 
 
-adminroute.get('/viewuser',authenticate,(req,res)=>{
-    try{
-    const user=req.Role;
-    res.json({user});}
-    catch{
-        res.status(404).json({message:'user not authorized'});
+adminroute.get('/viewuser', authenticate, (req, res) => {
+    try {
+        const user = req.Role;
+        res.json({ user });
+    }
+    catch {
+        res.status(404).json({ message: 'user not authorized' });
     }
 })
 
 
-adminroute.get('/logout', (req, res) => {
+adminroute.post('/logout', (req, res) => {
     res.clearCookie('Token'); // 'authToken' is the cookie name
     res.status(200).json({ message: 'Logout successful' });
 })
 
 
-export {adminroute}
+export { adminroute }
