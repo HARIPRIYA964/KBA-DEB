@@ -1,16 +1,16 @@
 import express,{json} from 'express';
-import { adminrouter } from './Router/adminroute.js';
 import dotenv from 'dotenv';
-import cookieParser from 'cookie-parser';
+import { adminRoute } from './route/adminroute.js';
 
 dotenv.config();
-const port = process.env.Port
+const port=process.env.Port;
 
-const app = express()
-app.use(json())
-app.use('/',adminrouter)
-app.use(cookieParser())
+const app= express();
+app.use(json());
+app.use('/',adminRoute)
 
 app.listen(port,()=>{
-    console.log(`Server is listening to ${port}`)
+    console.log(`server is running on port ${port}`);
 })
+
+
